@@ -1,0 +1,286 @@
+@font-face {
+    font-family: 'Montserrat-Light';
+    src: url('../fuente/Montserrat-Light.eot');
+    src: url('../fuente/Montserrat-Light.eot?#iefix') format('embedded-opentype'),
+        url('../fuente/Montserrat-Light.svg#Montserrat-Light') format('svg'),
+        url('../fuente/Montserrat-Light.ttf') format('truetype'),
+        url('../fuente/Montserrat-Light.woff') format('woff'),
+        url('../fuente/Montserrat-Light.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Montserrat-Bold';
+    src: url('../fuente/Montserrat-Bold.eot');
+    src: url('../fuente/Montserrat-Bold.eot?#iefix') format('embedded-opentype'),
+        url('../fuente/Montserrat-Bold.svg#Montserrat-Bold') format('svg'),
+        url('../fuente/Montserrat-Bold.ttf') format('truetype'),
+        url('../fuente/Montserrat-Bold.woff') format('woff'),
+        url('../fuente/Montserrat-Bold.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Montserrat-Regular';
+    src: url('../fuente/Montserrat-Regular.eot');
+    src: url('../fuente/Montserrat-Regular.eot?#iefix') format('embedded-opentype'),
+        url('../fuente/Montserrat-Regular.svg#Montserrat-Regular') format('svg'),
+        url('../fuente/Montserrat-Regular.ttf') format('truetype'),
+        url('../fuente/Montserrat-Regular.woff') format('woff'),
+        url('../fuente/Montserrat-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+:root {
+    --primary: #E25B19;
+    --secondary: #F6A312;
+    --errorColor: red;
+    --stepNumber: 6;
+    --containerWidth: 600px;
+    --bgColor: #333;
+    --inputBorderColor: lightgray;
+}
+
+::selection {
+    color: #fff;
+    background: var(--primary);
+}
+
+body {
+    font-family: 'Montserrat-Bold' !important;
+}
+
+
+
+#btnCamaras:hover {
+    background: #000;
+}
+
+
+/******  Apartado del menu principal   ******/
+
+.card{
+    margin-bottom: 0em;
+    border: none !important;
+}
+
+
+.card-body {
+    cursor: pointer !important;
+    background-color: black !important;
+    border-radius: 100% !important;
+    border: none !important;
+}
+
+.card-body:hover{
+    border-radius: 100% !important;
+}
+
+
+.card:hover {
+    background: rgb(245 154 81 / 91%) !important;
+    color: var(--secondary) !important;
+    transition: 0.5s ease !important;
+    border-radius: 100%;
+}
+
+
+
+.form-check-input[type=checkbox] {
+    border-radius: 1.25em !important;
+}
+
+.form-check-input:focus {
+    border-color: none !important;
+
+    box-shadow: none !important;
+}
+
+.form-check-input {
+    border: 1px solid rgb(247 151 0)  !important;
+    
+}
+
+
+.form-check-input:focus {
+    border-color: none !important;
+    box-shadow: none !important;
+}
+
+.fondo:checked {
+    background-color: rgb(247 99 0 / 79%) !important;
+    border-color: rgba(247, 231, 0, 0.781) !important;
+    border: 1px solid rgba(247, 231, 0, 0.781) !important;
+    transition: 0.5s ease;
+}
+
+.boton_menu{
+    text-decoration: none;
+    border: none !important;
+}
+
+/******  Apartado del cotizador Productos  ******/
+
+
+
+#preguntas__secciones .card-body{
+    border-radius: 10px !important;
+}
+
+.preguntas__boton{
+    color: white;
+}
+
+.preguntas__boton:hover{
+    color: var(--secondary) !important;
+    transition: 0.5s ease !important;
+    border-radius: none !important;
+}
+
+.modal-header{
+    background-color: black;
+    color:var(--secondary);
+}
+
+#camaras__kit p{
+    margin-bottom: 0px !important;
+}
+
+.form-check-input:checked {
+    background-color: #ff7d01c9 !important;
+    color: orange !important;
+}
+
+.productos__fondos{
+    background-color: #f6a2123f;
+}
+
+
+.productos_textos{
+    margin-bottom: 0px !important;
+    font-family: 'Montserrat-Light';
+    
+}
+
+.productos_textos_pequeños{
+    margin-bottom: 0px !important;
+    padding-bottom: .75em !important;
+    padding-top: .75em !important;
+    font-family: 'Montserrat-Light' !important;
+    
+}
+
+#seccion_preguntas .card-body{
+    cursor: pointer !important;
+     background-color: #ffd90054 !important; 
+     border-radius: 4% !important; 
+    border: none !important;
+}
+
+#seccion_preguntas .card:hover {
+    background: rgba(247, 153, 76, 0.801) !important;
+    color: white !important;
+    transition: 0.5s ease !important;
+    border-radius: 3% !important;
+}
+
+.seleccionado{
+    background: rgb(245 154 81 / 91%) !important;
+    transition: 0.5s ease !important;
+    color: black !important;
+}
+
+
+.error{
+    background: #e22019 !important;
+    color: white !important;
+    display: flex;
+    justify-content: center;
+}
+
+
+/*****Adicionales ****/
+
+.titulo_adicional{
+    background-color: #E25B19 !important;
+    color: white !important;
+}
+
+
+
+/***** Botones del footer****/
+
+.modal-footer .btn-primary{
+    background-color: var(--secondary) !important;
+    border: none !important;
+    color: #ffffff !important;
+    border: none !important;
+    transition: 0.5s ease !important;
+}
+
+
+.modal-footer .btn-primary:hover{
+    background-color: black !important;
+}
+
+.btn-check:focus+.btn-primary, .btn-primary:focus {
+    box-shadow: 0 0 0 0.25rem rgb(49 132 253 / 2%) !important;
+}
+
+.descripciones{
+    border: 6px solid var(--primary) !important;
+    padding: 20px !important;
+}
+
+#seccion_preguntas label{
+    font-size: calc(0.6em + 0.4vw) !important;
+}
+
+@media (max-width:1000px){
+    #seccion_preguntas label{
+        font-size: calc(0.4em + 1vw) !important;
+    }
+}
+
+.cursor{
+    width: 50%;
+}
+
+.cursor-servicios{
+    width: 83%;
+}
+
+.cursor:hover{
+    cursor: pointer !important;
+}
+
+.productos-links{
+    display: flex;
+    justify-content: center;
+    width: 90%;
+}
+.servicios-links{
+    display: flex;
+    justify-content: center;
+    width: 81%;
+}
+
+.contenido-servicios{
+    background: #E25B19;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    width: 60%;
+    height: 100%;
+    padding: 8%;
+    border-radius: 2vh;
+}
+/*      titulos de radios          */
+
+.titulos_radios{
+    font-size: medium;
+    margin-bottom: 0px !important;
+}

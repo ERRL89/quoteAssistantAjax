@@ -1,0 +1,496 @@
+<?php
+
+$contador_iteraciones  = 0;
+$subtotal_complemento = 0;
+$indice_final = count($kit_final);
+if($indice_final > 15)
+{
+    $tam_celda = 5;
+    $tam_letra = 7.2;
+    $tam_cantidad = 8;
+    $limite_iteraciones = 30;
+    $tam_leyenda = 5;
+}
+else
+{
+    $tam_celda = 5;
+    $tam_letra = 8;
+    $tam_cantidad = 10;
+    $limite_iteraciones = 16;
+    $tam_leyenda = 14;
+}
+foreach($kit_final as $componente) {
+    ///////////// INICIAN COMPLEMENTOS ///////////////
+    
+    $cantidad_complemento = $componente[2];
+    if($cantidad_complemento == 0 || $cantidad_complemento == NULL){
+        $cantidad_complemento_txt = "-";
+    } else {
+         $cantidad_complemento_txt = $cantidad_complemento;
+    }
+    $nombre_complemento = $componente[0];
+    $precio_complemento = $componente[1];
+    if($precio_complemento == 0 || $precio_complemento == NULL){
+        $precio_complemento_txt = "-";
+    } else {
+        $precio_complemento_txt = number_format($precio_complemento,2,'.',',');
+    }
+    if($nombre_complemento == "CABLE CAT 5")
+    {
+        $componente[2] = 0;
+    }
+    $importe_complemento = $componente[1] * $componente[2];
+    if($importe_complemento == 0 || $importe_complemento == NULL){
+        $importe_complemento_txt = "-";
+    } else {
+        $importe_complemento_txt = number_format($importe_complemento,2,'.',',');
+    }
+    
+    if($nombre_complemento == "kit" || $nombre_complemento == "descuento sirena")
+    {
+        $cantidad_complemento_txt = "";
+        $nombre_complemento = "";
+        $precio_complemento_txt = "";
+        $importe_complemento_txt = "";
+        $altura_concepto = $altura_concepto - $tam_celda;
+        $altura_descripcion = $altura_concepto - $tam_celda;
+    }
+    
+    if($nombre_complemento == "INSTALACIÓN, CONFIGURACIÓN, CAPACITACIÓN Y PUESTA A PUNTO")
+    {
+        $contador_iteraciones++;
+        ////// CANTIDAD //////
+        $pdf->SetY($altura_concepto);
+        $pdf->SetX(15);
+        $pdf->SetFont('helvetica', '', $tam_cantidad);
+        $pdf->Cell(30, $tam_leyenda, "$cantidad_complemento_txt", 0, 0, "C", $llenado);
+        ////// CANTIDAD //////
+    
+        ////// DESCRIPCIÓN (ARTÍCULO) //////
+        $pdf->SetY($altura_concepto);
+        $pdf->SetX(45);
+        $pdf->SetFont("helvetica", "B", $tam_letra);
+        $pdf->SetDrawColor(191, 191, 191);
+        $pdf->MultiCell(95, $tam_leyenda, "$nombre_complemento", 0, "C", $llenado, 0, '', '', true, 0, false, true, $tam_leyenda, 'M');
+        ////// DESCRIPCIÓN (ARTÍCULO) //////
+    
+        ////// DESCRIPCIÓN (DESCRIPCIÓN) //////
+        // $pdf->SetY($altura_descripcion);
+        // $pdf->SetX(45);
+        // $pdf->SetFont('helvetica','B',8);
+        // $pdf->MultiCell(95, 28, '$descripcion_complemento', 0, 'L', $llenado,0,'','',true,0,false,true,28,'M');
+        ////// DESCRIPCIÓN (DESCRIPCIÓN) //////
+    
+        ////// PRECIO UNITARIO //////
+        $pdf->SetY($altura_concepto);
+        $pdf->SetX(140);
+        $pdf->SetFont('helvetica', 'B', $tam_letra);
+        //$pdf->MultiCell(30, $tam_leyenda, "", 0, 'C', $llenado, 0, '', '', true, 0, false, true, $tam_leyenda, 'M');
+        //$pdf->MultiCell(30, 14, "$precio_complemento_txt", 0, 'C', $llenado, 0, '', '', true, 0, false, true, 14, 'M');
+        ////// PRECIO UNITARIO //////
+    
+        ////// PRECIO UNITARIO //////
+        $pdf->SetY($altura_concepto);
+        $pdf->SetX(170);
+        $pdf->SetFont('helvetica', 'B', $tam_letra);
+        //$pdf->MultiCell(31, $tam_leyenda, "", 0, 'C', $llenado, 0, '', '', true, 0, false, true, $tam_leyenda, 'M');
+        //$pdf->MultiCell(31, 14, "$importe_complemento_txt", 0, 'C', $llenado, 0, '', '', true, 0, false, true, 14, 'M');
+        ////// PRECIO UNITARIO //////
+        
+        $altura_concepto = $altura_concepto + $tam_leyenda;
+        $altura_descripcion = $altura_concepto + $tam_leyenda;
+        $subtotal_complemento = $subtotal_complemento + $importe_complemento;
+    }
+    else
+    {
+        $contador_iteraciones++;
+        ////// CANTIDAD //////
+        $pdf->SetY($altura_concepto);
+        $pdf->SetX(15);
+        $pdf->SetFont('helvetica', '', $tam_cantidad);
+        $pdf->Cell(30, $tam_celda, "$cantidad_complemento_txt", 0, 0, "C", $llenado);
+        ////// CANTIDAD //////
+    
+        ////// DESCRIPCIÓN (ARTÍCULO) //////
+        $pdf->SetY($altura_concepto);
+        $pdf->SetX(45);
+        $pdf->SetFont("helvetica", "B", $tam_letra);
+        $pdf->SetDrawColor(191, 191, 191);
+        $pdf->MultiCell(95, $tam_celda, "$nombre_complemento", 0, "C", $llenado, 0, '', '', true, 0, false, true, $tam_celda, 'M');
+        ////// DESCRIPCIÓN (ARTÍCULO) //////
+    
+        ////// DESCRIPCIÓN (DESCRIPCIÓN) //////
+        // $pdf->SetY($altura_descripcion);
+        // $pdf->SetX(45);
+        // $pdf->SetFont('helvetica','B',8);
+        // $pdf->MultiCell(95, 28, '$descripcion_complemento', 0, 'L', $llenado,0,'','',true,0,false,true,28,'M');
+        ////// DESCRIPCIÓN (DESCRIPCIÓN) //////
+    
+        ////// PRECIO UNITARIO //////
+        $pdf->SetY($altura_concepto);
+        $pdf->SetX(140);
+        $pdf->SetFont('helvetica', 'B', $tam_letra);
+        $pdf->MultiCell(30, $tam_celda, "", 0, 'C', $llenado, 1, '', '', true, 0, false, true, $tam_celda, 'M');
+        //$pdf->MultiCell(30, 6, "$precio_complemento_txt", 0, 'C', $llenado, 0, '', '', true, 0, false, true, 6, 'M');
+        ////// PRECIO UNITARIO //////
+    
+        ////// PRECIO UNITARIO //////
+        $pdf->SetY($altura_concepto);
+        $pdf->SetX(170);
+        $pdf->SetFont('helvetica', 'B', $tam_letra);
+        $pdf->MultiCell(31, $tam_celda, "", 0, 'C', $llenado, 1, '', '', true, 0, false, true, $tam_celda, 'M');
+        //$pdf->MultiCell(31, 6, "$importe_complemento_txt", 0, 'C', $llenado, 0, '', '', true, 0, false, true, 6, 'M');
+        ////// PRECIO UNITARIO //////
+        
+        $altura_concepto = $altura_concepto + $tam_celda;
+        $altura_descripcion = $altura_concepto + $tam_celda;
+        $subtotal_complemento = $subtotal_complemento + $importe_complemento;
+    }
+    
+    if ($llenado == true) {
+        $llenado = false;
+    } else {
+        $llenado = false;
+    }
+
+    if ($contador_iteraciones == $limite_iteraciones) {
+        ///////// TERMINA CONTENIDO /////////
+
+        ///////// INICIA FOOTER /////////
+
+        $altura_footer = $altura_concepto;
+        $altura_subtotal = $altura_footer;
+        $altura_iva = $altura_subtotal + 6;
+        $altura_total = $altura_iva + 6;
+
+        $importe_producto = 0;
+        $subtotal = $importe_producto + $subtotal_complemento;
+        $iva = $subtotal * 0.16;
+        $total = $subtotal + $iva;
+
+        $subtotal = number_format($subtotal, 2, '.', ',');
+        if (is_null($subtotal)) {
+            $subtotal = "$ 0.00";
+        } else {
+            $subtotal = "$ $subtotal";
+        }
+
+        $iva = number_format($iva, 2, '.', ',');
+        if (is_null($iva)) {
+            $iva = "$ 0.00";
+        } else {
+            $iva = "$ $iva";
+        }
+
+        $total = number_format($total, 2, '.', ',');
+        if (is_null($total)) {
+            $total = "$ 0.00";
+        } else {
+            $total = "$ $total";
+        }
+
+        ////// BARRA GRIS FOOTER //////
+        // $pdf->SetY($altura_footer);
+        // $pdf->SetX(15);
+        // $pdf->SetFont('helvetica', 'B', 12);
+        // $pdf->SetFillColor(191, 191, 191);
+        // $pdf->Cell(186, 6, "", 0, 0, 'C', TRUE);
+        ////// BARRA GRIS FOOTER //////
+
+        /*// SUBTOTAL (texto) //
+            $pdf->SetY($altura_subtotal);
+            $pdf->SetX(140);
+            $pdf->SetFont('helvetica','B',10);
+            $pdf->Cell(30, 6, "SUBTOTAL", 0, 0, 'C');
+            // SUBTOTAL (texto) //
+        
+            // SUBTOTAL (cantidad) //
+            $pdf->SetY($altura_subtotal);
+            $pdf->SetX(170);
+            $pdf->SetFont('helvetica','B',10);
+            $pdf->Cell(31, 6, "$subtotal", 0, 0, 'C');
+            // SUBTOTAL (cantidad) //
+        
+            // IVA (texto) //
+            $pdf->SetY($altura_iva);
+            $pdf->SetX(140);
+            $pdf->SetFont('helvetica','B',10);
+            $pdf->Cell(30, 6, "IVA", 0, 0, 'C',TRUE);
+            // IVA (texto) //
+        
+            // IVA (cantidad) //
+            $pdf->SetY($altura_iva);
+            $pdf->SetX(170);
+            $pdf->SetFont('helvetica','B',10);
+            $pdf->Cell(31, 6, "$iva", 0, 0, 'C',TRUE);
+            // IVA (cantidad) //
+        
+            // TOTAL (texto) //
+            $pdf->SetY($altura_total);
+            $pdf->SetX(140);
+            $pdf->SetFont('helvetica','B',10);
+            $pdf->Cell(30, 6, "TOTAL", 0, 0, 'C',TRUE);
+            // TOTAL (texto) //
+        
+            // TOTAL (cantidad) //
+            $pdf->SetY($altura_total);
+            $pdf->SetX(170);
+            $pdf->SetFont('helvetica','B',10);
+            $pdf->Cell(31, 6, "$total", 0, 0, 'C',TRUE);
+            // TOTAL (cantidad) //*/
+
+        ///////// TERMINA FOOTER /////////
+
+        //////// TERMINOS Y DATOS DEL ASESOR /////////
+
+        ////// BARRA NARANJA TYC //////
+        $pdf->SetY(215);
+        $pdf->SetX(15);
+        $pdf->SetFont('helvetica', 'B', 12);
+        $pdf->SetFillColor(253, 107, 13);
+        $pdf->Cell(90, 6, "", 0, 0, 'C', TRUE);
+        ////// BARRA NARANJA TYC //////
+
+        ////// TITULO TYC //////
+        $pdf->SetY(215);
+        $pdf->SetX(15);
+        $pdf->SetFont('helvetica', 'B', 10);
+        $pdf->SetTextColor(255, 255, 255);
+        $pdf->Cell(90, 6, "TERMINOS Y CONDICIONES", 0, 0, 'C');
+        ////// TITULO TYC //////
+
+       /* $texto_term = ' 1. Precios cotizados en moneda nacional mas el 16% de IVA.
+ 2. Se requiere depósito bancario del 60% del pedido total.
+ 3. Entrega inmediata.
+ 4. La garantía normal es por un periodo de 1 año.
+ 5. Promoción válida durante 15 días a partir de la fecha de cotización.
+ 6. Los precios cotizados son válidos para una sola orden de compra.
+ 7. Se requiere pago de depósito y primera mensualidad al inicio del proyecto para Leasing.
+ 8. La garantia es por contrato en curso para leasing.
+ 9. El contrato tiene una vigencia de 36 meses para Leasing.
+';*/
+
+        ////// TYC //////
+        $pdf->SetY(221);
+        $pdf->SetX(15);
+        $pdf->SetFont('helvetica', '', 6);
+        $pdf->SetTextColor(0, 0, 0);
+        $pdf->MultiCell(90, 28, $texto_term, 0, 'J', 0, 0, '', '', true, 0, false, true, 28, 'M');
+        ////// TYC //////
+
+        ////// SECCIÓN RECTANGULO CERRADOR //////
+        $pdf->SetY(221);
+        $pdf->SetX(140);
+        $pdf->SetFont('helvetica', 'B', 10);
+        $pdf->SetFillColor(253, 255, 0);
+        $pdf->SetTextColor(0, 0, 0);
+        $pdf->Cell(61, 6, '$nombre_usuario', 0, 0, 'R', TRUE);
+        ////// SECCIÓN RECTANGULO CERRADOR //////
+
+        ////// SECCIÓN RECTANGULO CERRADOR //////
+        $pdf->SetY(227);
+        $pdf->SetX(140);
+        $pdf->SetFont('helvetica', '', 10);
+        $pdf->Cell(61, 6, 'Alianzas comerciales', 0, 0, 'R');
+        ////// SECCIÓN RECTANGULO CERRADOR //////
+
+        ////// SECCIÓN RECTANGULO AMARILLO CORREO //////
+        $pdf->SetY(233);
+        $pdf->SetX(140);
+        $pdf->SetFont('helvetica', 'B', 10);
+        $pdf->SetFillColor(253, 255, 0);
+        $pdf->SetTextColor(0, 0, 0);
+        $pdf->Cell(61, 6, '$correo_usuario', 0, 0, 'R', TRUE);
+        ////// SECCIÓN RECTANGULO AMARILLO CORREO //////
+
+        ////// SECCIÓN RECTANGULO TELEFONO //////
+        $pdf->SetY(239);
+        $pdf->SetX(140);
+        $pdf->SetFont('helvetica', 'B', 10);
+        $pdf->Cell(61, 6, 'Tel. 55-5367-4298 / 55-6821-5744', 0, 0, 'R');
+        ////// SECCIÓN RECTANGULO TELEFONO //////
+
+        //////// TERMINOS Y DATOS DEL ASESOR /////////
+
+
+        // FUNCIÓN PARA COMENZAR UNA NUEVA PÁGINA CON EL TEMPLATE GENERADO
+        $pdf->AddPage('P', 'LETTER');
+        $pdf->useTemplate($tpl);
+        // TERMINA FUNCIÓN
+
+        // POSICIÓN DE PRIMERAS COORDENADAS (LAS COORDENADAS SE AJUSTAN A LOS MILIMETROS DE LA HOJA)
+        //Limite de hoja 0-216 (ancho) primer valor 0 representa borde
+        $pdf->SetY(43);
+        $pdf->SetX(15);
+        // SE ELIGE LA FUENTE
+        $pdf->SetFont('helvetica', '', 10.5);
+        // WRITEHTMLCELL permite crear una celda en la que podemos insertar código HTML y de esta forma hacer un texto más dinámico
+        //$pdf->writeHTMLCell(W, H, 'X', 'Y', $html, border, line, fill, reseth, 'align', autopadding);
+
+        /*$html = 'MARGEN INICIAL (1.5cm) 4.3cm de alto';
+            $pdf->writeHTMLCell(186, 5, '', '', $html, 1, 0, 0, TRUE, 'J', TRUE);*/
+
+        // REAJUSTE DE COORDENADAS (DESPLAZAMIENTO ENTRE LA HOJA)
+        $pdf->SetY(50);
+        $pdf->SetX(15);
+        // SE PUEDE CAMBIAR LA FUENTE, Y TAMAÑO VOLVIENDO A USAR EL COMANDO SETFONT
+        $pdf->SetFont('helvetica', 'B', 20);
+        $pdf->Cell(186, 10, 'COTIZACIÓN (EXTRAS)', 0, 0, 'R');
+
+        ////// SECCIÓN RECTANGULO NARANJA 01 //////
+        $pdf->SetY(65);
+        $pdf->SetX(121);
+        $pdf->SetFont('helvetica', 'B', 12);
+        // DEFINE COLOR DE RELLENO
+        $pdf->SetFillColor(253, 107, 13);
+        // DEFINE COLOR DE RELLENO
+
+        // DEFINE COLOR DE TEXTO
+        $pdf->SetTextColor(255, 255, 255);
+        // DEFINE COLOR DE TEXTO
+
+        // CELL(X,Y,texto,borde,ln,alineacion,relleno(booleano))
+        $pdf->Cell(80, 6, 'NÚMERO DE COTIZACIÓN', 0, 0, 'R', TRUE);
+        ////// SECCIÓN RECTANGULO NARANJA 01 //////
+
+        ////// SECCIÓN RECTANGULO AMARILLO 01 //////
+        $pdf->SetY(71);
+        $pdf->SetX(121);
+        $pdf->SetFont('helvetica', 'B', 12);
+        $pdf->SetFillColor(253, 255, 0);
+        $pdf->SetTextColor(0, 0, 0);
+        $pdf->Cell(80, 6, '$folio_cotizacion', 0, 0, 'R', TRUE);
+        ////// SECCIÓN RECTANGULO AMARILLO 01 //////
+
+        ////// SECCIÓN RECTANGULO NARANJA 02 //////
+        $pdf->SetY(77);
+        $pdf->SetX(121);
+        $pdf->SetFont('helvetica', 'B', 12);
+        $pdf->SetFillColor(253, 107, 13);
+        $pdf->SetTextColor(255, 255, 255);
+        $pdf->Cell(80, 6, 'CONDICIONES DE PAGO', 0, 0, 'R', TRUE);
+        ////// SECCIÓN RECTANGULO NARANJA 02 //////
+
+        ////// SECCIÓN RECTANGULO AMARILLO 02 //////
+        $pdf->SetY(83);
+        $pdf->SetX(121);
+        $pdf->SetFont('helvetica', 'B', 12);
+        $pdf->SetFillColor(253, 255, 0);
+        $pdf->SetTextColor(0, 0, 0);
+        $pdf->Cell(80, 6, '$condicion_pago', 0, 0, 'R', TRUE);
+        ////// SECCIÓN RECTANGULO AMARILLO 02 //////
+
+        ////// SECCIÓN RECTANGULO NARANJA (FECHA) //////
+        $pdf->SetY(65);
+        $pdf->SetX(15);
+        $pdf->SetFont('helvetica', 'B', 12);
+        $pdf->SetFillColor(253, 107, 13);
+        $pdf->SetTextColor(255, 255, 255);
+        $pdf->Cell(40, 6, 'FECHA', 0, 0, 'C', TRUE);
+        ////// SECCIÓN RECTANGULO NARANJA (FECHA) //////
+
+        $fecha_actual = fechaCastellano($fecha_actual);
+        ////// SECCIÓN RECTANGULO FECHA //////
+        $pdf->SetY(65);
+        $pdf->SetX(57);
+        $pdf->SetFont('helvetica', 'B', 10);
+        $pdf->SetTextColor(0, 0, 0);
+        $pdf->Cell(60, 6, $fecha_actual, 0, 0, 'L');
+        ////// SECCIÓN RECTANGULO FECHA //////
+
+        ////// SECCIÓN RECTANGULO AMARILLO (nombre de proyecto) //////
+        $pdf->SetY(71);
+        $pdf->SetX(15);
+        $pdf->SetFont('helvetica', 'B', 10);
+        $pdf->SetFillColor(253, 255, 0);
+        $pdf->SetTextColor(0, 0, 0);
+        $pdf->Cell(90, 6, '$direccion', 0, 0, 'L', TRUE);
+        ////// SECCIÓN RECTANGULO AMARILLO (nombre de proyecto) //////
+
+        ////// SECCIÓN RECTANGULO AMARILLO (nombre cliente) //////
+        $pdf->SetY(77);
+        $pdf->SetX(15);
+        $pdf->SetFont('helvetica', 'B', 10);
+        $pdf->SetFillColor(253, 255, 0);
+        $pdf->SetTextColor(0, 0, 0);
+        $pdf->Cell(90, 6, '$nombre_cliente', 0, 0, 'L', TRUE);
+        ////// SECCIÓN RECTANGULO AMARILLO (nombre cliente) //////
+
+        ////// SECCIÓN RECTANGULO AMARILLO (PRODUCTO/SERVICIO) //////
+        $pdf->SetY(83);
+        $pdf->SetX(15);
+        $pdf->SetFont('helvetica', 'B', 10);
+        $pdf->SetFillColor(253, 255, 0);
+        $pdf->SetTextColor(0, 0, 0);
+        $pdf->Cell(90, 6, '$cotizacion_producto', 0, 0, 'L', TRUE);
+        ////// SECCIÓN RECTANGULO AMARILLO (PRODUCTO/SERVICIO) //////
+
+        ////// INICIA ZONA DE LISTA DE ARTICULOS  //////
+
+        ////// CABECERAS DE LA TABLA (MARCO REFERENCIA - QUITAR) //////
+        $pdf->SetY(95);
+        $pdf->SetX(15);
+        $pdf->SetFont('helvetica', 'B', 12);
+        $pdf->Cell(186, 6, '', 0, 0, 'L');
+        ////// CABECERAS DE LA TABLA (MARCO REFERENCIA - QUITAR) //////
+
+        ////// CABECERAS DE LA TABLA //////
+        $pdf->SetY(95);
+        $pdf->SetX(15);
+        $pdf->SetFont('helvetica', 'B', 12);
+        $pdf->Cell(30, 6, 'Cant.', 0, 0, 'C');
+
+        /*$pdf->SetY(95);
+            $pdf->SetX(45);
+            $pdf->SetFont('helvetica','B',12);
+            $pdf->Cell(30, 6, 'Item no.', 0, 0, 'C');*/
+
+        $pdf->SetY(95);
+        $pdf->SetX(45);
+        $pdf->SetFont('helvetica', 'B', 12);
+        $pdf->Cell(95, 6, 'Descripción del producto.', 0, 0, 'C');
+
+        $pdf->SetY(95);
+        $pdf->SetX(140);
+        $pdf->SetFont('helvetica', 'B', 12);
+        $pdf->Cell(30, 6, 'P. Unitario.', 0, 0, 'C');
+
+        $pdf->SetY(95);
+        $pdf->SetX(170);
+        $pdf->SetFont('helvetica', 'B', 12);
+        $pdf->Cell(31, 6, 'Importe.', 0, 0, 'C');
+        ////// CABECERAS DE LA TABLA //////
+
+        ////// BARRA AMARILLA //////
+        $pdf->SetY(101);
+        $pdf->SetX(15);
+        $pdf->SetFont('helvetica', 'B', 12);
+        $pdf->SetFillColor(253, 255, 0);
+        $pdf->SetTextColor(0, 0, 0);
+        $pdf->Cell(30, 6, '$condicion_amarillo', 0, 0, 'C', TRUE);
+        ////// BARRA AMARILLA //////
+
+        ////// BARRA GRIS //////
+        $pdf->SetY(101);
+        $pdf->SetX(45);
+        $pdf->SetFont('helvetica', 'B', 12);
+        $pdf->SetFillColor(191, 191, 191);
+        $pdf->Cell(156, 6, '', 0, 0, 'C', TRUE);
+        ////// BARRA GRIS //////
+
+        // INFORMACIÓN PARA PRUEBAS //
+        $conceptos = 2;
+        $altura_concepto = 107;
+        $altura_articulo = 107;
+        $altura_descripcion = 119;
+        // INFORMACIÓN PARA PRUEBAS //
+
+        ///////// COMIENZA CONTENIDO /////////
+
+        $control_extras = 0;
+        $llenado = false;
+        $fecha_actual = date('Y-m-d');
+
+        $contador_iteraciones = 0;
+    }
+}
