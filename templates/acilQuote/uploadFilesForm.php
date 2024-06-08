@@ -37,7 +37,8 @@
   $consulta->execute();
   if ($consulta->rowCount() > 0) {
     $numRegimen=0;
-    while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
+    while ($fila = $consulta->fetch(PDO::FETCH_ASSOC))
+    {
         $claveRegimen[$numRegimen] = $fila['clave'];
         $descripcionRegimen[$numRegimen] = $fila['descripcion'];
         $numRegimen+=1;
@@ -50,7 +51,8 @@
     $consulta->execute();
     if ($consulta->rowCount() > 0) {
       $numCFDI=0;
-      while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
+      while ($fila = $consulta->fetch(PDO::FETCH_ASSOC))
+      {
           $claveCFDI[$numCFDI] = $fila['clave'];
           $descripcionCFDI[$numCFDI] = $fila['descripcion'];
           $numCFDI+=1;
@@ -394,14 +396,14 @@
                 }
                 else{
                  
-                  echo "
-                  var nuevaOpcion = $('<option>', {
-                      value: '{$clave}',
-                      text: '{$descripcion}'
-                  });
-                  nuevaOpcion.attr('selected', 'selected');
-                  $('#regimen').append(nuevaOpcion);
-                  "; 
+                echo "
+                var nuevaOpcion = $('<option>', {
+                    value: '{$clave}',
+                    text: '{$descripcion}'
+                });
+                nuevaOpcion.attr('selected', 'selected');
+                $('#regimen').append(nuevaOpcion);
+                "; 
                 }   
             }
         ?>

@@ -25,7 +25,7 @@
   function acceptContract()
   {
     $.ajax({
-        url: './templates/acilQuote/closeContractForm.php',
+        url: 'closeContractProcess.php',
         type: 'POST',
         data: 
         {

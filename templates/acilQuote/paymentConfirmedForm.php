@@ -12,6 +12,7 @@
             echo "
                  <h4 class='mt-3'>Te hemos enviado el contrato de servicios y datos bancarios para tu depósito o transferencia al correo que nos proporcionaste.<br><br>*No procedio el pago con tarjeta*.</h4><br>
                  <h6 class='mt-3'>* Si no te aparece revisa en tu bandeja de correo no deseado. *</h6><br>
+                 <button class='btn btn-primary btn-custom text-center' onClick='uploadFiles()'>SUBIR COMPROBANTE DE PAGO</button>
                  ";
         }
         else{
@@ -24,11 +25,12 @@
                  <span>Clabe: 012180001122049911</span><br>
                  <span>Referencia: ".$numContrato."</span><br>
                  <h6 class='mt-3'>* Si no te aparece revisa en tu bandeja de correo no deseado. *</h6><br>
+                 <button class='btn btn-primary btn-custom text-center' onClick='uploadFiles()'>SUBIR COMPROBANTE DE PAGO</button>
                  ";
         }
     ?>
    
-<button class="btn btn-primary btn-custom text-center" onClick="uploadFiles()">SUBIR DOCUMENTOS</button>
+
 </div>
 
 <script>

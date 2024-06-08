@@ -3,7 +3,6 @@
 	include_once('config/config.php');
 	include_once('config/dbConf.php');
     include_once('functions.php');
-	include_once('quoteProcess.php');
     require $root."templates/$theme/header.php";
 
 	#RECIBE KIT DESDE LANDING PAGE

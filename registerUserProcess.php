@@ -1,45 +1,137 @@
 <?php
     #SE RECIBE VALORES DE CLOSE CONTRACT FORM
-    if(isset($_POST['root']))/*------------*/{ $root            = $_POST['root'];            }
-    if(isset($_POST['folioCot']))/*--------*/{ $folioCot        = $_POST['folioCot'];        } 
-    if(isset($_POST['nombre']))/*----------*/{ $nombre          = $_POST['nombre'];          } 
-    if(isset($_POST['calle']))/*-----------*/{ $calle           = $_POST['calle'];           }
-    if(isset($_POST['numero']))/*----------*/{ $numero          = $_POST['numero'];          }
-    if(isset($_POST['colonia']))/*---------*/{ $colonia         = $_POST['colonia'];         } 
-    if(isset($_POST['codigoPostal']))/*----*/{ $codigoPostal    = $_POST['codigoPostal'];    } 
-    if(isset($_POST['estado']))/*----------*/{ $estado          = $_POST['estado'];          } 
-    if(isset($_POST['municipio']))/*-------*/{ $municipio       = $_POST['municipio'];       } 
-    if(isset($_POST['telefono']))/*--------*/{ $telefono        = $_POST['telefono'];        } 
-    if(isset($_POST['email']))/*-----------*/{ $email           = $_POST['email'];           } 
-    if(isset($_POST['kitNum']))/*----------*/{ $kitNum          = $_POST['kitNum'];          } 
-    if(isset($_POST['kitMensualidad']))/*--*/{ $kitMensualidad  = $_POST['kitMensualidad'];  } 
-    if(isset($_POST['acuerdoPago']))/*-----*/{ $acuerdoPago     = $_POST['acuerdoPago'];     } 
-    if(isset($_POST['modalidad']))/*-------*/{ $modalidad       = $_POST['modalidad'];       } 
-    if(isset($_POST['frecuenciaPago']))/*--*/{ $frecuenciaPago  = $_POST['frecuenciaPago'];  } 
-    if(isset($_POST['fechaInicio']))/*-----*/{ $fechaInicio     = $_POST['fechaInicio'];     } 
-    if(isset($_POST['metodoPago']))/*------*/{ $metodoPago      = $_POST['metodoPago'];      } 
-    if(isset($_POST['contacto1']))/*-------*/{ $contacto1       = $_POST['contacto1'];       } 
-    if(isset($_POST['telefono1']))/*-------*/{ $telefono1       = $_POST['telefono1'];       }
-    if(isset($_POST['contacto2']))/*-------*/{ $contacto2       = $_POST['contacto2'];       }
-    if(isset($_POST['telefono2']))/*-------*/{ $telefono2       = $_POST['telefono2'];       }
-    if(isset($_POST['deviceSessionId']))/**/ { $deviceSessionId = $_POST['deviceSessionId']; }
+        if(isset($_POST['root']))/*------------*/{ $root            = $_POST['root'];            }
+        if(isset($_POST['folioCot']))/*--------*/{ $folioCot        = $_POST['folioCot'];        } 
+        if(isset($_POST['nombre']))/*----------*/{ $nombre          = $_POST['nombre'];          } 
+        if(isset($_POST['calle']))/*-----------*/{ $calle           = $_POST['calle'];           }
+        if(isset($_POST['numero']))/*----------*/{ $numero          = $_POST['numero'];          }
+        if(isset($_POST['colonia']))/*---------*/{ $colonia         = $_POST['colonia'];         } 
+        if(isset($_POST['codigoPostal']))/*----*/{ $codigoPostal    = $_POST['codigoPostal'];    } 
+        if(isset($_POST['estado']))/*----------*/{ $estado          = $_POST['estado'];          } 
+        if(isset($_POST['municipio']))/*-------*/{ $municipio       = $_POST['municipio'];       } 
+        if(isset($_POST['telefono']))/*--------*/{ $telefono        = $_POST['telefono'];        } 
+        if(isset($_POST['email']))/*-----------*/{ $email           = $_POST['email'];           } 
+        if(isset($_POST['rfc']))/*-------------*/{ $rfc             = $_POST['rfc'];             } 
+        if(isset($_POST['direccionF']))/*------*/{ $direccionF      = $_POST['direccionF'];      } 
+        if(isset($_POST['cpFiscal']))/*--------*/{ $cpFiscal        = $_POST['cpFiscal'];        } 
+        if(isset($_POST['regimen']))/*---------*/{ $regimen         = $_POST['regimen'];         } 
+        if(isset($_POST['cfdi']))/*------------*/{ $cfdi            = $_POST['cfdi'];            } 
+        if(isset($_POST['kitNum']))/*----------*/{ $kitNum          = $_POST['kitNum'];          } 
+        if(isset($_POST['kitMensualidad']))/*--*/{ $kitMensualidad  = $_POST['kitMensualidad'];  } 
+        if(isset($_POST['acuerdoPago']))/*-----*/{ $acuerdoPago     = $_POST['acuerdoPago'];     } 
+        if(isset($_POST['modalidad']))/*-------*/{ $modalidad       = $_POST['modalidad'];       } 
+        if(isset($_POST['frecuenciaPago']))/*--*/{ $frecuenciaPago  = $_POST['frecuenciaPago'];  } 
+        if(isset($_POST['fechaInicio']))/*-----*/{ $fechaInicio     = $_POST['fechaInicio'];     } 
+        if(isset($_POST['metodoPago']))/*------*/{ $metodoPago      = $_POST['metodoPago'];      } 
+        if(isset($_POST['contacto1']))/*-------*/{ $contacto1       = $_POST['contacto1'];       } 
+        if(isset($_POST['telefono1']))/*-------*/{ $telefono1       = $_POST['telefono1'];       }
+        if(isset($_POST['contacto2']))/*-------*/{ $contacto2       = $_POST['contacto2'];       }
+        if(isset($_POST['telefono2']))/*-------*/{ $telefono2       = $_POST['telefono2'];       }
+        if(isset($_POST['deviceSessionId']))/**/ { $deviceSessionId = $_POST['deviceSessionId']; }
 
-    #DATOS DE TARJETA BANCARIA
-    if(isset($_POST['nameTDC']))/*----------*/{ $nameTDC      = $_POST['nameTDC'];        }
-    if(isset($_POST['cardNumber']))/*-------*/{ $cardNumber   = $_POST['cardNumber'];     }
-    if(isset($_POST['expirationdate']))/*---*/{ $expiracion   = $_POST['expirationdate']; }
-    if(isset($_POST['securitycode']))/*-----*/{ $securitycode = $_POST['securitycode'];   }
-    if(isset($_POST['calleTDC']))/*---------*/{ $calleTDC     = $_POST['calleTDC'];       }
-    if(isset($_POST['coloniaTDC']))/*-------*/{ $coloniaTDC   = $_POST['coloniaTDC'];     }
-    if(isset($_POST['estadoTDC']))/*--------*/{ $estadoTDC    = $_POST['estadoTDC'];      }
-    if(isset($_POST['municipioTDC']))/*-----*/{ $municipioTDC = $_POST['municipioTDC'];   }
-    if(isset($_POST['cpTDC']))/*------------*/{ $cpTDC        = $_POST['cpTDC'];          }
+        #DATOS DE TARJETA BANCARIA
+        if(isset($_POST['nameTDC']))/*----------*/{ $nameTDC      = $_POST['nameTDC'];        }
+        if(isset($_POST['cardNumber']))/*-------*/{ $cardNumber   = $_POST['cardNumber'];     }
+        if(isset($_POST['expirationdate']))/*---*/{ $expiracion   = $_POST['expirationdate']; }
+        if(isset($_POST['securitycode']))/*-----*/{ $securitycode = $_POST['securitycode'];   }
+        if(isset($_POST['calleTDC']))/*---------*/{ $calleTDC     = $_POST['calleTDC'];       }
+        if(isset($_POST['coloniaTDC']))/*-------*/{ $coloniaTDC   = $_POST['coloniaTDC'];     }
+        if(isset($_POST['estadoTDC']))/*--------*/{ $estadoTDC    = $_POST['estadoTDC'];      }
+        if(isset($_POST['municipioTDC']))/*-----*/{ $municipioTDC = $_POST['municipioTDC'];   }
+        if(isset($_POST['cpTDC']))/*------------*/{ $cpTDC        = $_POST['cpTDC'];          }
+
+    #Recibimos COMPROBANTE DE DOMICILIO cargado desde formulario
+    if(isset($_FILES['domicilio']) && !empty($_FILES['domicilio']['name']))
+    {
+        $comprobanteDomicilio = $_FILES['domicilio'];
+        $rutaBase = $root."docs/digitalContracts"; 
+        $nombreCarpeta = $folioCot;
+        $rutaCompleta = $rutaBase . '/' . $nombreCarpeta;
+        #CREA CARPETA PARA ALMACENAMIENTO TEMPORAL DE DOCUMENTOS
+        if (!file_exists($rutaCompleta))
+        {
+            if (mkdir($rutaCompleta, 0777, true))
+            {
+                echo "<script>console.log('Carpeta para almacenamiento temporal de documentos creada exitosamente en $rutaCompleta.')</script>";
+            }
+            else
+            {
+                echo "<script>console.log('Hubo un error al crear la carpeta')</script>";
+            }
+        }
+        else
+        {
+            echo "<script>console.log('La carpeta ya existe en $rutaCompleta')</script>";
+        }
+        #GUARDA DOCUMENTO EN CARETA TEMPORAL
+        $rutaDestino = $root."docs/digitalContracts/".$folioCot."/".$comprobanteDomicilio['name'];
+        if(move_uploaded_file($comprobanteDomicilio['tmp_name'], $rutaDestino))
+        {
+            $nombreArchivo = "comprobante_domicilio.pdf";
+            $rutaNuevoNombre = $root."docs/digitalContracts/".$folioCot."/".$nombreArchivo; 
+            if(rename($rutaDestino, $rutaNuevoNombre))
+            {
+                echo "<script>console.log('Archivo comprobante de domicilio guardado correctamente en $rutaNuevoNombre')</script>";
+            }
+            else
+            {
+                echo "<script>El archivo comprobante de domicilio no se ha cargado</script>";
+            }
+        }
+        else
+        {
+            echo "<script>El archivo comprobante de domicilio no se ha cargado</script>";
+        } 
+    }
+
+    //Recibimos CONSTANCIA DE SITUACION FISCAL cargada desde formulario
+    if(isset($_FILES['constanciaFiscal']) && !empty($_FILES['constanciaFiscal']['name']))
+    {
+        $constanciaFiscal = $_FILES['constanciaFiscal'];
+        $rutaBase = $root."docs/digitalContracts"; 
+        $nombreCarpeta = $folioCot;
+        $rutaCompleta = $rutaBase . '/' . $nombreCarpeta;
+        #CREA CARPETA PARA ALMACENAMIENTO TEMPORAL DE DOCUMENTOS
+        if (!file_exists($rutaCompleta))
+        {
+            if (mkdir($rutaCompleta, 0777, true))
+            {
+                echo "<script>console.log('Carpeta para almacenamiento temporal de documentos creada exitosamente en $rutaCompleta.')</script>";
+            }
+            else
+            {
+                echo "<script>console.log('Hubo un error al crear la carpeta')</script>";
+            }
+        }
+        else
+        {
+            echo "<script>console.log('La carpeta ya existe en $rutaCompleta')</script>";
+        }
+
+        $rutaDestino = $root."docs/digitalContracts/".$folioCot."/".$constanciaFiscal['name'];
+        if(move_uploaded_file($constanciaFiscal['tmp_name'], $rutaDestino))
+        {
+            $nombreArchivo = "constancia_situacion_fiscal.pdf";
+            $rutaNuevoNombre = $root."docs/digitalContracts/".$folioCot."/".$nombreArchivo; 
+            if (rename($rutaDestino, $rutaNuevoNombre))
+            {
+                echo "<script>console.log('Archivo constancia de situacion fiscal guardado correctamente en $rutaNuevoNombre')</script>";
+            }
+            else
+            {
+                echo "<script>El archivo constancia de situacion fiscal no se ha cargado</script>";
+            }
+        }
+        else
+        {
+            echo "<script>El archivo constancia de situacion fiscal no se ha cargado</script>";
+        } 
+    }
 
     $direccion=$calle." ".$numero." ".$colonia." ".$codigoPostal." ".$estado." ".$municipio;
     
     if(isset($calleTDC) && isset($coloniaTDC)){ $direccionTDC=$calleTDC." ".$coloniaTDC; }
    
-
     $fallo = 0;
 
     #CONFIGURACIONES DB Y RUTAS
@@ -102,7 +194,7 @@
             $metodoPagoDB=    $dataConsulta["metodo_pago"];
             $idAPI=           $dataConsulta["id_api"];
 
-        if($metodoPagoDB==1)      { $metodoPagoTxt="Transferencia Electrónica"; }
+             if($metodoPagoDB==1) { $metodoPagoTxt="Transferencia Electrónica"; }
         else if($metodoPagoDB==2) { $metodoPagoTxt="Depósito Bancario";         }
         else if($metodoPagoDB==3) { $metodoPagoTxt="Tarjeta de Crédito/Débito"; }
 
@@ -135,7 +227,7 @@
             "nombreKitDB"       => $nombreKitDB,
             "id_plan"           => $id_plan
         );
-            return $dataUser;
+        return $dataUser;
     }
 
     # CARGA FUNCIONES PARA CREAR Y BUSCAR CUSTOMER #
@@ -188,7 +280,7 @@
                 $id_api=addNewCustomer($nameTDC, $email, $telefono, $direccionTDC, $cpTDC, $estadoTDC, $municipioTDC);
                 $addNewCustomer=$id_api[0]; //True o false
 
-                if (isset($id_api[1])){ $idAPI=$id_api[1]; }//ID API del Customer creado
+                if(isset($id_api[1])){ $idAPI=$id_api[1]; }//ID API del Customer creado
                
                 if($addNewCustomer==true)
                 {
@@ -240,5 +332,5 @@
     {
         $dataUserPrecontract=insertPrecontrato(0);
     }
-
+    include_once('templates/acilQuote/registerUserForm.php');
 ?>

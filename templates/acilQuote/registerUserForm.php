@@ -1,10 +1,6 @@
-<?php
-    require('../../registerUserProcess.php');
-?>
-
 <!--Pantalla de agradecimiento con redireccionamiento a formulario de contrato -->
 <div class="container-md d-flex justify-content-center align-items-center flex-column mt-4 mb-5 container_form_custom">
-    <h3 class="text-center">Ayudanos a confirmar tus datos</h3>
+    <h3 class="text-center">Revisa tus datos</h3>
     <div class="container-md text-left mt-4">
         <ul>
         <hr class="line_hr">
@@ -26,106 +22,48 @@
                     <li><h6>kit: <?php echo $dataUserPrecontract["nombreKitDB"];?></h6></li>
                     <li><h6>Mensualidad: $<?php echo $dataUserPrecontract["mensualidadDB"]; $pagoMensualidad=$dataUserPrecontract["mensualidadDB"]?></h6></li>
                     <li><h6>Metodo de Pago: <?php echo $metodoPagoTxt;?></h6></li> 
-        
         <?php
-            if($metodoPago==3){
+            if($metodoPago==3)
+            {
                 $totalPagar=$pagoMensualidad*2;
                 echo "
                     <hr class='line_hr mt-4'>       
                     <h5 class='fw-bold'>DATOS DE PAGO</h5>
                     <hr class='line_hr'>
                     ";
-                    if (isset($tarjeta)) {
+                    if (isset($tarjeta))
+                    {
                         echo "<li><h6 class='mt-3'>Tarjeta: $tarjeta</h6></li>";
                     }
                     echo "<li><h6>Nombre del Titular: $nameTDC</h6></li>
                           <li><h6>Suscripción Mensual: $$pagoMensualidad</h6></li>
                           <li><h6>Déposito Inicial (Cargo Único): $$pagoMensualidad</h6></li>
                           <li><h6><strong>TOTAL A PAGAR: $$totalPagar</strong></h6></li>
-                         "; 
+                    "; 
             }
         ?>
-        
         </ul>
     </div>
 
     <div class="container-fluid d-flex justify-content-center align-items-center column-gap-3 mt-5">
-        <button class="btn btn-primary btn-custom text-center" onClick="regresar()">REGRESAR</button>
         <?php
-            if($metodoPago==3)
-            {
-                echo "
-                     <button class='btn btn-primary btn-custom text-center' onClick='realizarPagoContrato()'>CONFIRMAR</button>
-                     <script>
-                        function realizarPagoContrato() {
-                            let urlPay='idApi=$idAPI'+
-                                    '&idPlan=$id_plan'+
-                                    '" . (isset($id_tarjeta) ? "&tarjeta=$id_tarjeta" : "") . "' + 
-                                    '&numeroCotizacion=$folioCot'+
-                                    '&nombre=".$dataUserPrecontract["nombreDB"]."'+
-                                    '&calle=".$dataUserPrecontract["calleDB"]."'+
-                                    '&numero=".$dataUserPrecontract["numeroDB"]."'+
-                                    '&colonia=".$dataUserPrecontract["coloniaDB"]."'+
-                                    '&codigoPostal=$codigoPostal'+
-                                    '&municipio=$municipio'+
-                                    '&estado=$estado'+
-                                    '&telefono=$telefono'+
-                                    '&email=$email'+
-                                    '&kitNum=$kitNum'+
-                                    '&kitMensualidad=$kitMensualidad'+
-                                    '&acuerdoPago=$acuerdoPago'+
-                                    '&modalidad=$modalidad'+
-                                    '&frecuenciaPago=$frecuenciaPago'+
-                                    '&fechaInicio=$fechaInicio'+
-                                    '&contacto1=$contacto1'+
-                                    '&telefono1=$telefono1'+
-                                    '&contacto2=$contacto2'+
-                                    '&telefono2=$telefono2'+
-                                    '&metodoPago=$metodoPago';
-                            location.href = '/quoteAssistant/paymentConfirmed.php?'+urlPay
-                            var modal = new bootstrap.Modal(document.getElementById('exampleModal'));
-                            modal.show();
-                        }
-                     </script>
-                     "; 
-            }
-            else
-            {
-                echo "
-                        <button class='btn btn-primary btn-custom text-center' onClick='envioContrato()'>CONFIRMAR</button>
-                        <script>
-                            function envioContrato() {
-                                let urlPay='metodoPago='+$metodoPago+
-                                               '&numeroCotizacion=$folioCot'+
-                                               '&nombre=".$dataUserPrecontract["nombreDB"]."'+
-                                               '&calle=".$dataUserPrecontract["calleDB"]."'+
-                                               '&numero=".$dataUserPrecontract["numeroDB"]."'+
-                                               '&colonia=".$dataUserPrecontract["coloniaDB"]."'+
-                                               '&codigoPostal=$codigoPostal'+
-                                               '&municipio=$municipio'+
-                                               '&estado=$estado'+
-                                               '&telefono=".$dataUserPrecontract["telefonoDB"]."'+
-                                               '&email=$email'+
-                                               '&kitNum=$kitNum'+
-                                               '&kitMensualidad=$kitMensualidad'+
-                                               '&acuerdoPago=$acuerdoPago'+
-                                               '&modalidad=$modalidad'+
-                                               '&frecuenciaPago=$frecuenciaPago'+
-                                               '&fechaInicio=$fechaInicio'+
-                                               '&contacto1=$contacto1'+
-                                               '&telefono1=$telefono1'+
-                                               '&contacto2=$contacto2'+
-                                               '&telefono2=$telefono2'
-                                location.href = '/quoteAssistant/paymentConfirmed.php?'+urlPay
-                                var modal = new bootstrap.Modal(document.getElementById('exampleModal'));
-                                modal.show();
-                            }
-                        </script>
-                     ";
-            }
-        ?>
+            echo "
+                 <button class='btn btn-primary btn-custom text-center' onClick='paymentConfirmedProcess();'>CONFIRMAR</button>  
+                ";
+        ?>   
     </div>
 </div><br>
+
+<div class="modal fade" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <center> <div class="loader"></div></center>
+                <center><h2>Procesando...</h2></center>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
     OpenPay.setSandboxMode(true);
@@ -133,8 +71,183 @@
     console.log(deviceDataId)
 </script>
 
-<script>//Boton de Regresar
-    function regresar() {
-        window.history.back()
+<script>
+    function paymentConfirmedProcess2()
+    {
+        var modal = new bootstrap.Modal(document.getElementById('exampleModal'));
+        modal.show();
+        $.ajax({
+            url: 'paymentConfirmedProcess.php',
+            type: 'POST',
+            data: 
+            {
+                root:           '<?php echo $root;           ?>',
+                metodoPago:     '<?php echo $metodoPago;     ?>',
+                folioCot:       '<?php echo $folioCot;       ?>',
+                nombre:         '<?php echo $nombre;         ?>',
+                calle:          '<?php echo $calle;          ?>',
+                numero:         '<?php echo $numero;         ?>',
+                colonia:        '<?php echo $colonia;        ?>',
+                codigoPostal:   '<?php echo $codigoPostal;   ?>',
+                estado:         '<?php echo $estado;         ?>',
+                municipio:      '<?php echo $municipio;      ?>',
+                telefono:       '<?php echo $telefono;       ?>',
+                email:          '<?php echo $email;          ?>',
+                kitNum:         '<?php echo $kitNum;         ?>',
+                kitMensualidad: '<?php echo $kitMensualidad; ?>',
+                acuerdoPago:    '<?php echo $acuerdoPago;    ?>',
+                modalidad:      '<?php echo $modalidad;      ?>',
+                frecuenciaPago: '<?php echo $frecuenciaPago; ?>',
+                fechaInicio:    '<?php echo $fechaInicio;    ?>',
+                contacto1:      '<?php echo $contacto1;      ?>',
+                telefono1:      '<?php echo $telefono1;      ?>',
+                contacto2:      '<?php echo $contacto2;      ?>',
+                telefono2:      '<?php echo $telefono2;      ?>'
+            },
+            success: function(result)
+            {
+                $('#principal').html(result);
+                modal.hide();
+            }
+        });
     }
+
+    function paymentConfirmedProcess3()
+    {
+        var modal = new bootstrap.Modal(document.getElementById('exampleModal'));
+        modal.show();
+        $.ajax({
+            url: 'paymentConfirmedProcess.php',
+            type: 'POST',
+            data: 
+            {
+                root:           '<?php echo $root;           ?>',
+                idApi:          '<?php echo $idAPI;          ?>',
+                idPlan:         '<?php echo $id_plan;        ?>',
+                tajeta:         '<?php echo $tarjeta;        ?>',
+                deviceSessionId:'<?php echo $deviceSessionId;?>',
+                metodoPago:     '<?php echo $metodoPago;     ?>',
+                folioCot:       '<?php echo $folioCot;       ?>',
+                nombre:         '<?php echo $nombre;         ?>',
+                calle:          '<?php echo $calle;          ?>',
+                numero:         '<?php echo $numero;         ?>',
+                colonia:        '<?php echo $colonia;        ?>',
+                codigoPostal:   '<?php echo $codigoPostal;   ?>',
+                estado:         '<?php echo $estado;         ?>',
+                municipio:      '<?php echo $municipio;      ?>',
+                telefono:       '<?php echo $telefono;       ?>',
+                email:          '<?php echo $email;          ?>',
+                kitNum:         '<?php echo $kitNum;         ?>',
+                kitMensualidad: '<?php echo $kitMensualidad; ?>',
+                acuerdoPago:    '<?php echo $acuerdoPago;    ?>',
+                modalidad:      '<?php echo $modalidad;      ?>',
+                frecuenciaPago: '<?php echo $frecuenciaPago; ?>',
+                fechaInicio:    '<?php echo $fechaInicio;    ?>',
+                contacto1:      '<?php echo $contacto1;      ?>',
+                telefono1:      '<?php echo $telefono1;      ?>',
+                contacto2:      '<?php echo $contacto2;      ?>',
+                telefono2:      '<?php echo $telefono2;      ?>'
+            },
+            success: function(result)
+            {
+                $('#principal').html(result);
+                modal.hide();
+            }
+        });
+    }
+</script>
+
+<script>
+    function paymentConfirmedProcess()
+    {
+        var modal = new bootstrap.Modal(document.getElementById('exampleModal'));
+        modal.show();
+        $.ajax({
+            url: 'paymentConfirmedProcess.php',
+            type: 'POST',
+            data: 
+            {
+                root:           '<?php echo $root;                                 ?>',
+                idAPI:          '<?php echo isset($idAPI)      ? $idAPI      : ''; ?>',
+                idPlan:         '<?php echo isset($id_plan)    ? $id_plan    : ''; ?>',
+                tarjeta:        '<?php echo isset($id_tarjeta) ? $id_tarjeta : ''; ?>',
+                deviceSessionId:'<?php echo $deviceSessionId;?>',
+                metodoPago:     '<?php echo $metodoPago;     ?>',
+                folioCot:       '<?php echo $folioCot;       ?>',
+                nombre:         '<?php echo $nombre;         ?>',
+                calle:          '<?php echo $calle;          ?>',
+                numero:         '<?php echo $numero;         ?>',
+                colonia:        '<?php echo $colonia;        ?>',
+                codigoPostal:   '<?php echo $codigoPostal;   ?>',
+                estado:         '<?php echo $estado;         ?>',
+                municipio:      '<?php echo $municipio;      ?>',
+                telefono:       '<?php echo $telefono;       ?>',
+                email:          '<?php echo $email;          ?>',
+                rfc:            '<?php echo $rfc;            ?>',
+                direccionF:     '<?php echo $direccionF;     ?>',
+                cpFiscal:       '<?php echo $cpFiscal;       ?>',
+                regimen:        '<?php echo $regimen;        ?>',
+                cfdi:           '<?php echo $cfdi;           ?>',
+                kitNum:         '<?php echo $kitNum;         ?>',
+                kitMensualidad: '<?php echo $kitMensualidad; ?>',
+                acuerdoPago:    '<?php echo $acuerdoPago;    ?>',
+                modalidad:      '<?php echo $modalidad;      ?>',
+                frecuenciaPago: '<?php echo $frecuenciaPago; ?>',
+                fechaInicio:    '<?php echo $fechaInicio;    ?>',
+                contacto1:      '<?php echo $contacto1;      ?>',
+                telefono1:      '<?php echo $telefono1;      ?>',
+                contacto2:      '<?php echo $contacto2;      ?>',
+                telefono2:      '<?php echo $telefono2;      ?>'
+            },
+            success: function(result)
+            {
+                $('#principal').html(result);
+                modal.hide();
+            }
+        });
+    }
+
+    /*function paymentConfirmedProcess3()
+    {
+        var modal = new bootstrap.Modal(document.getElementById('exampleModal'));
+        modal.show();
+        $.ajax({
+            url: 'paymentConfirmedProcess.php',
+            type: 'POST',
+            data: 
+            {
+                root:           '<?php echo $root;           ?>',
+                idApi:          '<?php echo $idAPI;          ?>',
+                idPlan:         '<?php echo $id_plan;        ?>',
+                tajeta:         '<?php echo $tarjeta;        ?>',
+                deviceSessionId:'<?php echo $deviceSessionId;?>',
+                metodoPago:     '<?php echo $metodoPago;     ?>',
+                folioCot:       '<?php echo $folioCot;       ?>',
+                nombre:         '<?php echo $nombre;         ?>',
+                calle:          '<?php echo $calle;          ?>',
+                numero:         '<?php echo $numero;         ?>',
+                colonia:        '<?php echo $colonia;        ?>',
+                codigoPostal:   '<?php echo $codigoPostal;   ?>',
+                estado:         '<?php echo $estado;         ?>',
+                municipio:      '<?php echo $municipio;      ?>',
+                telefono:       '<?php echo $telefono;       ?>',
+                email:          '<?php echo $email;          ?>',
+                kitNum:         '<?php echo $kitNum;         ?>',
+                kitMensualidad: '<?php echo $kitMensualidad; ?>',
+                acuerdoPago:    '<?php echo $acuerdoPago;    ?>',
+                modalidad:      '<?php echo $modalidad;      ?>',
+                frecuenciaPago: '<?php echo $frecuenciaPago; ?>',
+                fechaInicio:    '<?php echo $fechaInicio;    ?>',
+                contacto1:      '<?php echo $contacto1;      ?>',
+                telefono1:      '<?php echo $telefono1;      ?>',
+                contacto2:      '<?php echo $contacto2;      ?>',
+                telefono2:      '<?php echo $telefono2;      ?>'
+            },
+            success: function(result)
+            {
+                $('#principal').html(result);
+                modal.hide();
+            }
+        });
+    }*/
 </script>

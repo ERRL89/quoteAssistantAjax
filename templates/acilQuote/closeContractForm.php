@@ -1,16 +1,3 @@
-<?php
-  #RECIBIMOS INFORMACION INICIAL
-  if(isset($_POST['root']))     { $root     = $_POST['root'];     }
-  if(isset($_POST['nombre']))   { $nombre   = $_POST['nombre'];   } 
-  if(isset($_POST['calle']))    { $calle    = $_POST['calle'];    } 
-  if(isset($_POST['numero']))   { $numero   = $_POST['numero'];   } 
-  if(isset($_POST['colonia']))  { $colonia  = $_POST['colonia'];  } 
-  if(isset($_POST['kitNum']))   { $kitNum   = $_POST['kitNum'];   } 
-  if(isset($_POST['kitType']))  { $kitType  = $_POST['kitType'];  } 
-  if(isset($_POST['kitPrice'])) { $kitPrice = $_POST['kitPrice']; } 
-  if(isset($_POST['folioCot'])) { $folioCot = $_POST['folioCot']; } 
-?>
-
 <!-- FORMULARIO DE CONTRATO -->
 <div class="mb-5">
   <h2 class="text-center">Formulario de Contrato</h2>
@@ -20,21 +7,22 @@
     <div class="container-sm container_form_custom">
     <span class="fw-bold fst-italic fs-5 textCustom">Documentos</span><br>
 
-     <!-- ------------------------ COMPROBANTE DE DOMICILIO ---------------------------- -->
+      <!-- ------------------------ COMPROBANTE DE DOMICILIO --------------------------------- -->
       <div class="domicilioContainer mt-3">
         <label for="domicilio" class="form-label label-custom">Comprobante de Domicilio</label>
-        <input type="file" name="domicilio" id="domicilio" class="form-control" accept=".pdf" required/>
+        <input type="file" name="domicilio" id="domicilio" class="form-control" accept=".pdf"/>
       </div>
       
       <!-- ----------------------- CONSTANCIA DE SITUACION FISCAL ---------------------------- -->
       <div id="constanciaContainer">
         <label for="file" class="mt-3 form-label label-custom">Constancia de Situación Fiscal</label>
-        <input type="file" name="constanciaFiscal" id="constanciaFiscal" class="form-control" accept=".pdf" required/>
+        <input type="file" name="constanciaFiscal" id="constanciaFiscal" class="form-control" accept=".pdf"/>
       </div>
 
       <br><span class="fw-bold fst-italic fs-5 textCustom">Datos generales</span>
 
-      <div class="row mt-3 mb-3"><!-- FOLIO COTIZACION Y DEVICE ID DE OPEN PAY-->
+      <!-- FOLIO COTIZACION Y DEVICE ID DE OPEN PAY-->
+      <div class="row mt-3 mb-3">
           <input type="hidden" id="deviceIdHiddenFieldName" name="deviceIdHiddenFieldName">
           <div class="col-md-8">
           <label class="label-custom" for="folioCot">Folio de cotización:</label>
@@ -42,13 +30,15 @@
         </div>
       </div>
 
-      <div class="mb-3"><!-- NOMBRE CLIENTE -->
+      <!-- NOMBRE CLIENTE -->
+      <div class="mb-3">
         <label for="nombre" class="form-label label-custom">Nombre:</label>
         <input type="text" class="form-control" id="nombre" name="nombre" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+" value="<?php if(isset($nombre)){echo $nombre;}?>" required>
         <div class="invalid-feedback">Introduce tu Nombre o Razón Social</div>
       </div>
 
-      <div class="mb-3"><!-- CALLE - NUMERO - CODIGO POSTAL -->
+      <!-- CALLE - NUMERO - CODIGO POSTAL -->
+      <div class="mb-3">
         <label for="direccion" class="form-label label-custom">Dirección:</label>
         <div class="row mb-3">
           <div class="col-md-6 mb-2">
@@ -66,7 +56,8 @@
         </div>
       </div>
 
-      <div class="mb-3"><!-- ESTADO MUNICIPIO COLONIA -->
+      <!-- ESTADO MUNICIPIO COLONIA -->
+      <div class="mb-3">
         <div class="row mb-3">
         <div class="col-md-4 mb-2">
             <input type="text" class="form-control form-input" placeholder="Municipio" id="municipio" name="municipio" required disabled>
@@ -85,7 +76,8 @@
         </div>
       </div>
 
-      <div class="mb-4"><!-- TELEFONO - EMAIL -->
+      <!-- TELEFONO - EMAIL -->
+      <div class="mb-4">
         <div class="row mb-3">
             <div class="col-md-6"><!-- Telefono -->
               <label for="phone" class="form-label label-custom">Teléfono:</label>
@@ -100,9 +92,62 @@
         </div>
       </div>
 
+      <!-- Leyenda Datos Fiscales -->
+      <div>
+        <div class="row mb-3">
+            <div class="col-md-8">
+               <span class="fw-bold fst-italic fs-5 textCustom">Datos fiscales</span>
+            </div>
+            <div class="col-md-4">
+              <!-- Checkbox EDITAR -->
+              <div class="container-fluid d-flex justify-content-end align-items-center">
+                <label class="mt-1 form-label label-custom" for="editar">Editar</label>
+                <div class="form-check">
+                  <input class="text-center check-custom" type="checkbox" id="editar" value="1">
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+
+      <div class="mb-3"><!-- RFC/Direccion -->
+        <div class="row mb-3">
+            <div class="col-md-6"><!-- RFC -->
+              <label for="rfc" class="form-label label-custom">RFC:</label>
+              <input type="text" class="form-control sinBotonera" id="rfc" name="rfc" value="XAXX010101000" disabled required>
+              <div class="invalid-feedback">Introduce RFC debe contener 13 digitos</div>
+            </div>
+            <div class="col-md-6"><!-- Dirección -->
+              <label for="direccionF" class="form-label label-custom">Dirección:</label>
+              <input type="text" class="form-control" id="direccionF" name="direccionF" value="" disabled required>
+              <div class="invalid-feedback">Introduce tu dirección</div>
+            </div>
+        </div>
+      </div>
+
+      <div class="mb-3"><!-- CP/Regimen Fiscal/CP -->
+        <div class="row mb-3">
+            <div class="col-md-4"><!-- CP -->
+                <p class="label-custom">Codigo Postal:</p>
+                <input type="number" id="cpFiscal" name="cp" class="form-control" value="06470" minlength="5" disabled required>
+            </div>
+            <div class="col-md-4"><!-- Regimen Fiscal -->
+                <p class="label-custom">Regimen Fiscal:</p>
+                <select class="form-select" name="regimenFiscal" id="regimen" aria-label="Default select example" disabled required>
+                </select>
+            </div>
+            <div class="col-md-4"><!-- Uso de CFDI -->
+                <p class="label-custom">Uso de CFDI:</p>
+                <select class="form-select" name="usoCFDI" id="cfdi" aria-label="Default select example" disabled required>
+                </select>
+            </div>
+        </div>
+      </div>
+
       <span class="fw-bold fst-italic fs-5 textCustom">Datos del servicio</span>
 
-      <div class="mt-3 mb-3"><!-- TIPO KIT/MENSUALIDAD -->
+      <!-- TIPO KIT/MENSUALIDAD -->
+      <div class="mt-3 mb-3">
         <div class="row mb-3">
             <div class="col-md-6"><!-- Tipo de Kit 4001-4004 -->
                 <p class="label-custom">Tipo de kit:</p>
@@ -115,7 +160,8 @@
         </div>
       </div>
 
-      <div class="mb-3"><!-- ACUERDO PAGO - MODALIDAD - FRECUENCIA DE PAGO -->
+      <!-- ACUERDO PAGO - MODALIDAD - FRECUENCIA DE PAGO -->
+      <div class="mb-3">
         <div class="row mb-3">
             <div class="col-md-6">
                 <p class="label-custom">Acuerdo de Pago:</p>
@@ -132,7 +178,8 @@
         </div>
       </div>
 
-      <div class="mb-3"><!-- INICIO DE CONTRATO - METODO DE PAGO -->
+      <!-- INICIO DE CONTRATO - METODO DE PAGO -->
+      <div class="mb-3">
         <div class="row mb-3">
             <div class="col-md-6">
                 <p class="label-custom">Fecha inicio contrato:</p>
@@ -154,7 +201,8 @@
 
       <span class="fw-bold fst-italic fs-5 textCustom">Referencias</span>
       
-      <div class="mt-3 mb-3"><!-- CONTACTO/REFERENCIA 1 -->
+      <!-- CONTACTO/REFERENCIA 1 -->
+      <div class="mt-3 mb-3">
         <div class="row mb-3">
             <div class="col-md-6">
                <p class="label-custom">Contacto 1:</p>
@@ -169,7 +217,8 @@
         </div>
       </div>
 
-      <div><!-- CONTACTO/REFERENCIA 2 -->
+      <!-- CONTACTO/REFERENCIA 2 -->
+      <div>
         <div class="row mb-3">
             <div class="col-md-6">
                <p class="label-custom">Contacto 2:</p>
@@ -184,7 +233,8 @@
         </div>
       </div>
 
-      <div id="datosBancarios"><!-- DATOS BANCARIOS -->
+      <!-- DATOS BANCARIOS -->
+      <div id="datosBancarios">
         <div class="mt-3 mb-4"><!-- Leyenda Informacion de Pago -->
           <div class="row">
             <span class="fw-bold fst-italic fs-5 textCustom">Información de pago</span>
@@ -610,6 +660,17 @@
   </form>
 </div>
 
+<div class="modal fade" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <center> <div class="loader"></div></center>
+                <center><h2>Guardando ...</h2></center>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- EXTRAE MUNICIPIO ESTADO Y COLONIA POR API -->
 <script>
   const elemento = document.getElementById('cp');
@@ -704,17 +765,30 @@
     }
 </script>
 
+<!-- Device ID Open Pay -->
+<script type="text/javascript">
+     OpenPay.setId('meqbc1rusn21h1gbnwjx');
+     OpenPay.setApiKey('pk_dfe97b6ab18e46ef9f2d0dfc59686211');
+     OpenPay.setSandboxMode(true);
+</script>
+
 <!-- CONTROL DE MENU DATOS BANCARIOS -->
 <script>
   $(document).ready(function() {
+
+    var deviceSessionId = OpenPay.deviceData.setup("form", "deviceIdHiddenFieldName");
+    window.a=deviceSessionId
+    console.log(window.a)
+    
     $("#datosBancarios").hide()
     $("#btnContinuar").text("CONTINUAR")
 
     $("#metodoPago").change(function() {
-      if($(this).val() == 3) {
+      if($(this).val() == 3) 
+      {
         $("#btnContinuar").text("PAGAR Y CONTINUAR")
         $("#datosBancarios").show()
-        $('#name').attr('required', true);
+        $('#nameTDC').attr('required', true);
         $('#cardnumber').attr('required', true);
         $('#expirationdate').attr('required', true);
         $('#securitycode').attr('required', true);
@@ -724,10 +798,11 @@
         $('#municipioTDC').attr('required', true);
         $('#cpTDC').attr('required', true);
       }
-      else{
+      else
+      {
         $("#datosBancarios").hide()
         $("#btnContinuar").text("CONTINUAR")
-        $('#name').removeAttr('required');
+        $('#nameTDC').removeAttr('required');
         $('#cardnumber').removeAttr('required');
         $('#expirationdate').removeAttr('required');
         $('#securitycode').removeAttr('required');
@@ -737,6 +812,105 @@
         $('#municipioTDC').removeAttr('required');
         $('#cpTDC').removeAttr('required');
       }
+    })
+
+    $('#editar').change(function() {
+      if($(this).prop('checked')) 
+      {
+        $('#rfc').prop('disabled', false);
+        $('#direccionF').prop('disabled', false);
+        $('#cpFiscal').prop('disabled', false);
+        $('#regimen').prop('disabled', false);
+        $('#cfdi').prop('disabled', false);
+      }
+      else
+      {
+        $(this).prop('checked', false);
+        $('#rfc').prop('disabled', true);
+        $('#direccionF').prop('disabled', true);
+        $('#cpFiscal').prop('disabled', true);
+        $('#regimen').prop('disabled', true);
+        $('#cfdi').prop('disabled', true);
+      }
+    })
+
+    $('#colonia').change(function() {
+      $('#direccionF').val($('#calle').val()+" "+$('#numero').val()+" "+$('#colonia').val()+" "+$('#cp').val()+" "+$('#estado').val()+" "+$('#municipio').val())
+    })
+
+    //Cuando detecta cambios en inputs de datos fiscales se habilita BTN Actualizar Informacion
+    $('#rfc').on('input', function() {
+        $('#btnEnviar').removeAttr('disabled');
+        $(this).val($(this).val().toUpperCase());
+    })
+
+    $('#rfc').change(function() {
+      let rfcValue = $('#rfc').val();
+      if (rfcValue.length >= 13)
+      {
+          $('#btnEnviar').removeAttr('disabled');
+      }
+      else
+      {
+        alert("El RFC debe contener al menos 13 digitos")
+        $('#rfc').val('XAXX010101000')
+        $('#btnEnviar').prop('disabled', true);
+      }
+    })
+
+    $('#direccionF').on('input', function() {
+      if($('#rfc').val()!="XAXX010101000")
+      {
+        $('#btnEnviar').removeAttr('disabled');
+      }
+      else
+      {
+        alert("Para hacer cualquier cambio ingrese primero su RFC")
+      } 
+    })
+
+    $('#cpFiscal').on('input', function() {
+      if($('#rfc').val()!="XAXX010101000")
+      {
+        $('#btnEnviar').removeAttr('disabled');
+      }
+      else
+      {
+        alert("Para hacer cualquier cambio ingrese primero su RFC")
+        $('#cpFiscal').val('06470')
+      } 
+    })
+
+    $('#cpFiscal').change(function() {
+      let cpValue = $('#cpFiscal').val();
+      if (cpValue.length >= 5) {
+          $('#btnEnviar').removeAttr('disabled');
+      }else{
+        alert("El CP debe contener al menos 5 digitos")
+        $('#btnEnviar').prop('disabled', true);
+      }
+    })
+
+    $('#regimen').on('input', function() {
+      if($('#rfc').val()!="XAXX010101000")
+      {
+        $('#btnEnviar').removeAttr('disabled');
+      }
+      else
+      {
+        alert("Para hacer cualquier cambio ingrese primero su RFC")
+      } 
+    })
+
+    $('#cfdi').on('input', function() {
+      if($('#rfc').val()!="XAXX010101000")
+      {
+        $('#btnEnviar').removeAttr('disabled');
+      }
+      else
+      {
+        alert("Para hacer cualquier cambio ingrese primero su RFC")
+      } 
     })
 
     //SCRIPT DE CONTROL DE TARJETA 
@@ -1022,48 +1196,64 @@
     var form = document.getElementById("form");
     if (form.checkValidity())
     {
+      var modal = new bootstrap.Modal(document.getElementById('exampleModal'));
+      modal.show();
+      var formData = new FormData();
+      formData.append('root',            '<?php echo $root; ?>'      );
+      formData.append('folioCot',        $('#folioCot').val()        );
+      formData.append('nombre',          $('#nombre').val()          );
+      formData.append('calle',           $('#calle').val()           );
+      formData.append('numero',          $('#numero').val()          );
+      formData.append('colonia',         $('#colonia').val()         );
+      formData.append('codigoPostal',    $('#cp').val()              );
+      formData.append('estado',          $('#estado').val()          );
+      formData.append('municipio',       $('#municipio').val()       );
+      formData.append('telefono',        $('#telefono').val()        );
+      formData.append('email',           $('#email').val()           );
+      formData.append('rfc',             $('#rfc').val()             );
+      formData.append('direccionF',      $('#direccionF').val()      );
+      formData.append('cpFiscal',        $('#cpFiscal').val()        );
+      formData.append('regimen',         $('#regimen').val()         );
+      formData.append('cfdi',            $('#cfdi').val()            );
+      formData.append('kitNum',          '<?php echo $kitNum; ?>'    );
+      formData.append('kitMensualidad',  $('#kitMensualidad').val()  );
+      formData.append('acuerdoPago',     $('#acuerdoPago').val()     );
+      formData.append('modalidad',       $('#modalidad').val()       );
+      formData.append('frecuenciaPago',  $('#frecuenciaPago').val()  );
+      formData.append('fechaInicio',     $('#fechaInicio').val()     );
+      formData.append('metodoPago',      $('#metodoPago').val()      );
+      formData.append('contacto1',       $('#contacto1').val()       );
+      formData.append('telefono1',       $('#telefono1').val()       );
+      formData.append('contacto2',       $('#contacto2').val()       );
+      formData.append('telefono2',       $('#telefono2').val()       );
+      formData.append('deviceSessionId', window.a                    );
+      formData.append('nameTDC',         $('#nameTDC').val()         );
+      formData.append('cardNumber',      $('#cardnumber').val()      );
+      formData.append('expirationdate',  $('#expirationdate').val()  );
+      formData.append('securitycode',    $('#securitycode').val()    );
+      formData.append('kitMensualidad',  $('#kitMensualidad').val()  );
+      formData.append('calleTDC',        $('#calleTDC').val()        );
+      formData.append('coloniaTDC',      $('#coloniaTDC').val()      );
+      formData.append('estadoTDC',       $('#estadoTDC').val()       );
+      formData.append('municipioTDC',    $('#municipioTDC').val()    );
+      formData.append('cpTDC',           $('#cpTDC').val()           );
+
+      var domicilioFile =  $('#domicilio')[0].files[0];
+      var constanciaFile = $('#constanciaFiscal')[0].files[0];
+      formData.append('domicilio',        domicilioFile );
+      formData.append('constanciaFiscal', constanciaFile);
+
       $.ajax({
-          url: './templates/acilQuote/registerUserForm.php',
+          url: 'registerUserProcess.php',
           type: 'POST',
-          data: 
-          {
-              root:/*-----------*/'<?php echo $root; ?>',
-              folioCot:/*-------*/$('#folioCot').val(),
-              nombre:/*---------*/$('#nombre').val(),
-              calle:/*----------*/$('#calle').val(),
-              numero:/*---------*/$('#numero').val(),
-              colonia:/*--------*/$('#colonia').val(),
-              codigoPostal:/*---*/$('#cp').val(),
-              estado:/*---------*/$('#estado').val(),
-              municipio:/*------*/$('#municipio').val(),
-              telefono:/*-------*/$('#telefono').val(),
-              email:/*----------*/$('#email').val(),
-              kitNum:/*---------*/'<?php echo $kitNum; ?>',
-              kitMensualidad:/*-*/$('#kitMensualidad').val(),
-              acuerdoPago:/*----*/$('#acuerdoPago').val(),
-              modalidad:/*------*/$('#modalidad').val(),
-              frecuenciaPago:/*-*/$('#frecuenciaPago').val(),
-              fechaInicio:/*----*/$('#fechaInicio').val(),
-              metodoPago:/*-----*/$('#metodoPago').val(),
-              contacto1:/*------*/$('#contacto1').val(),
-              telefono1:/*------*/$('#telefono1').val(),
-              contacto2:/*------*/$('#contacto2').val(),
-              telefono2:/*------*/$('#telefono2').val(),
-              deviceSessionId:/**/$('#deviceSessionId').val(),
-              nameTDC:/*--------*/$('#nameTDC').val(),
-              cardNumber:/*-----*/$('#cardnumber').val(),
-              expirationdate:/*-*/$('#expirationdate').val(),
-              securitycode:/*---*/$('#securitycode').val(),
-              kitMensualidad:/*-*/$('#kitMensualidad').val(),
-              calleTDC:/*-------*/$('#calleTDC').val(),
-              coloniaTDC:/*-----*/$('#coloniaTDC').val(),
-              estadoTDC:/*------*/$('#estadoTDC').val(),
-              municipioTDC:/*---*/$('#municipioTDC').val(),
-              cpTDC:/*----------*/$('#cpTDC').val()
-          },
+          data: formData,
+          processData: false, 
+          contentType: false,
           success: function(result)
           {
+              modal.hide();
               $('#principal').html(result);
+              
           }
       });
     }

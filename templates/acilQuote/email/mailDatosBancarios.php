@@ -155,7 +155,7 @@
                                                         </tbody>
                                                       </table>
                                                       <p class='text-dark text-justify' style='line-height: 24px; font-size: 16px; color: #1a202c; width: 100%; margin: 0;' align='justify'>
-                                                        A continuaci&#243;n encontraras un enlace donde puedes cargar la documentaci&#243;n necesaria para avanzar en el proceso. De forma simultanea te hemos enviado tu contrato, el cual deberas revisar y firmar para cargarlo en el paso siguiente. Te solicitamos que completes estos pasos tan pronto como te sea posible.
+                                                        A continuaci&#243;n encontraras un enlace donde podras cargar tu comprobante de pago para avanzar en el proceso. De forma simultanea te hemos enviado tu contrato, el cual deberas revisar y firmar. Te solicitamos que completes estos pasos tan pronto como te sea posible.
                                                       </p>
                                                       <table class='s-3 w-full' role='presentation' border='0' cellpadding='0' cellspacing='0' style='width: 100%;' width='100%'>
                                                         <tbody>
@@ -206,7 +206,7 @@
                                                                   <tbody>
                                                                     <tr>
                                                                       <td style='line-height: 24px; font-size: 16px; border-radius: 6px; margin: 0;' align='center' bgcolor='#0d6efd'>
-                                                                        <a href='https://demo.acilseguridad.com/quoteAssistant/uploadFiles.php?nC=$numContrato64' style='color: #ffffff; font-size: 16px; font-family: Helvetica, Arial, sans-serif; text-decoration: none; border-radius: 6px; line-height: 20px; display: block; font-weight: normal; white-space: nowrap; background-color: #0d6efd; padding: 8px 12px; border: 1px solid #0d6efd;'>Carga tus Documentos</a>
+                                                                        <a href='https://demo.acilseguridad.com/quoteAssistant/uploadFiles.php?nC=$numContrato64' style='color: #ffffff; font-size: 16px; font-family: Helvetica, Arial, sans-serif; text-decoration: none; border-radius: 6px; line-height: 20px; display: block; font-weight: normal; white-space: nowrap; background-color: #0d6efd; padding: 8px 12px; border: 1px solid #0d6efd;'>Subir comprobante de pago</a>
                                                                       </td>
                                                                     </tr>
                                                                   </tbody>
