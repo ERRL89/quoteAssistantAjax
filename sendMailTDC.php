@@ -13,8 +13,7 @@
     $mailSubject = "Comprobante de Pago (#{$numContrato})";
     $mailPath = $root.'templates/acilQuote/email/mailNewContract.php';
     $mailData = array(
-        array("var_name" => "nombre", "var_val" => "{$nombre}"),
-        array("var_name" => "numContrato64", "var_val" => "{$numContrato64}")
+        array("var_name" => "nombre", "var_val" => "{$nombre}")
     );
 
     $routeRecibo=$root."docs/digitalContracts/".$numContrato."/comprobante_pago_".$numContrato.".pdf";

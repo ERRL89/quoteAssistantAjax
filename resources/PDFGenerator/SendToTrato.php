@@ -80,7 +80,7 @@
     $pdf->SetX(125);
     // SE ELIGE LA FUENTE
     $pdf->SetFont('helvetica','',8);
-    $mensaje = $folioCotizacion;
+    $mensaje = $folioCot;
     $pdf->Cell(27.6, 4, $mensaje, 0, 0, 'C');
     //////////////// SE AÑADE NÚMERO DE COTIZACIÓN ///////////////
 
@@ -94,6 +94,7 @@
     //////////////// SE AÑADE NÚMERO DE CLIENTE ///////////////
 
     //////////////// SE AÑADE NOMBRE DE CLIENTE O RAZÓN SOCIAL ///////////////
+    $persona="Persona Fisica";
     $pdf->SetY(33.4);
     $pdf->SetX(108.5);
     // SE ELIGE LA FUENTE
@@ -396,15 +397,97 @@
 
     $carpeta = $root."docs/digitalContracts/".$numContrato;
 
-    if (!file_exists($carpeta)) {
-        if (mkdir($carpeta, 0777)) { 
+    if (!file_exists($carpeta))
+    {
+        if (mkdir($carpeta, 0777))
+        { 
             chmod($carpeta, 0777); 
             $pdf->Output($root."docs/digitalContracts/".$numContrato."/contrato_para_firma_".$numContrato.".pdf", 'F');
         } 
     }
 
+    $archivoOrigen=[];
+    $archivoActual=[];
+    $nuevoNombreArchivo=[];
 
-    
+    #MUEVE ARCHIVOS DE CARPETA TEMPORAL A CARPETA DE CONTRATO
+    $archivoOrigen[0] =  $root."docs/digitalContracts/".$folioCot."/comprobante_domicilio.pdf"; 
+    $archivoOrigen[1] =  $root."docs/digitalContracts/".$folioCot."/constancia_situacion_fiscal.pdf";
+    $rutaDestino = $root."docs/digitalContracts/".$numContrato."/"; 
 
+    #RUTAS PARA RENONBRAR ARCHIVOS
+    $archivoActual[0] =  $root."docs/digitalContracts/".$numContrato."/comprobante_domicilio.pdf"; 
+    $nuevoNombreArchivo[0] = $root."docs/digitalContracts/".$numContrato."/comprobante_domicilio_".$numContrato.".pdf"; 
 
+    $archivoActual[1] =  $root."docs/digitalContracts/".$numContrato."/constancia_situacion_fiscal.pdf"; 
+    $nuevoNombreArchivo[1] = $root."docs/digitalContracts/".$numContrato."/constancia_situacion_fiscal.pdf_".$numContrato.".pdf"; 
+
+    for($i=0;$i<=1;$i++)
+    {
+        if(substr($rutaDestino, -1) !== '/')
+        {
+            $rutaDestino .= '/';
+        }
+        #MUEVE ARCHIVBOS
+        if(file_exists($archivoOrigen[$i]) && is_dir($rutaDestino))
+        {
+            $archivoDestino = $rutaDestino . basename($archivoOrigen[$i]);
+            
+            if (rename($archivoOrigen[$i], $archivoDestino))
+            {
+                echo "<script>console.log('Archivo movido exitosamente a $archivoDestino')</script>";
+            }
+            else
+            {
+                echo "<script>console.log('Hubo un error al mover el archivo')</script>";
+            }
+        }
+        else
+        {
+            if(!file_exists($archivoOrigen[$i]))
+            {
+                echo "<script>console.log('El archivo de origen no existe')</script>";
+            }
+            if(!is_dir($rutaDestino))
+            {
+                echo "<script>console.log('El directorio de destino no existe')</script>";
+            }
+        }
+        #RENOMBRA LOS ARCHIVOS
+        if (file_exists($archivoActual[$i]))
+        {
+            if (rename($archivoActual[$i], $nuevoNombreArchivo[$i]))
+            {
+                echo "<script>console.log('El archivo ha sido renombrado exitosamente')</script>";
+            }
+            else
+            {
+                echo "<script>console.log('Hubo un error al renombrar el archivo')</script>";
+            }
+        }
+        else
+        {
+            echo "<script>console.log('El archivo actual no existe')</script>";
+        }
+        #ELIMINA CARPETA TEMPORAL
+        if($i==1)
+        {
+            $directorioEliminar = $root."docs/digitalContracts/".$folioCot;
+            if (is_dir($directorioEliminar))
+            {
+                if (rmdir($directorioEliminar))
+                {
+                    echo "<script>console.log('Carpeta temporal eliminada exitosamente')</script>";
+                } 
+                else
+                {
+                    echo "<script>console.log('Hubo un error al eliminar la carpeta')</script>";
+                }
+            }
+            else
+            {
+                echo "<script>console.log('El directorio no existe')</script>";
+            }
+        }
+    }
 ?>
