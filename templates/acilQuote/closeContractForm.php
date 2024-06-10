@@ -1,5 +1,5 @@
 <!-- FORMULARIO DE CONTRATO -->
-<div class="mb-5">
+<div id="formContrato" class="mb-5">
   <h2 class="text-center">Formulario de Contrato</h2>
   <h6 class="text-center">* Porfavor llene los campos faltantes *</h6>
   <form id="form" method="post" enctype="multipart/form-data" onchange="checkFileSize(this)" novalidate>
@@ -10,7 +10,7 @@
       <!-- ------------------------ COMPROBANTE DE DOMICILIO --------------------------------- -->
       <div class="domicilioContainer mt-3">
         <label for="domicilio" class="form-label label-custom">Comprobante de Domicilio</label>
-        <input type="file" name="domicilio" id="domicilio" class="form-control" accept=".pdf"/>
+        <input type="file" name="domicilio" id="domicilio" class="form-control" accept=".pdf" required/>
       </div>
       
       <!-- ----------------------- CONSTANCIA DE SITUACION FISCAL ---------------------------- -->
@@ -660,12 +660,18 @@
   </form>
 </div>
 
-<div class="modal fade" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-body">
-                <center> <div class="loader"></div></center>
-                <center><h2>Guardando ...</h2></center>
+<div id="progressBar">
+    <div class="">
+        <div class="w-100 h-100">
+            <div class="form-signin divCenter mt-4">
+                <div class="cajalogin divCenter">
+                    <div class="progress" style="width:75%;">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <div class="texto-sesion text-center">
+                        <h3>Enviando información ...</h3>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -779,9 +785,10 @@
     var deviceSessionId = OpenPay.deviceData.setup("form", "deviceIdHiddenFieldName");
     window.a=deviceSessionId
     console.log(window.a)
-    
     $("#datosBancarios").hide()
     $("#btnContinuar").text("CONTINUAR")
+
+    $("#progressBar").hide()
 
     $("#metodoPago").change(function() {
       if($(this).val() == 3) 
@@ -822,6 +829,7 @@
         $('#cpFiscal').prop('disabled', false);
         $('#regimen').prop('disabled', false);
         $('#cfdi').prop('disabled', false);
+        $('#constanciaFiscal').attr('required', true);
       }
       else
       {
@@ -831,6 +839,7 @@
         $('#cpFiscal').prop('disabled', true);
         $('#regimen').prop('disabled', true);
         $('#cfdi').prop('disabled', true);
+        $('#constanciaFiscal').removeAttr('required');
       }
     })
 
@@ -1196,8 +1205,8 @@
     var form = document.getElementById("form");
     if (form.checkValidity())
     {
-      var modal = new bootstrap.Modal(document.getElementById('exampleModal'));
-      modal.show();
+      $("#progressBar").show()
+      $("#formContrato").hide()
       var formData = new FormData();
       formData.append('root',            '<?php echo $root; ?>'      );
       formData.append('folioCot',        $('#folioCot').val()        );
@@ -1251,7 +1260,7 @@
           contentType: false,
           success: function(result)
           {
-              modal.hide();
+              $("#datosBancarios").hide()
               $('#principal').html(result);
               
           }

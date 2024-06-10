@@ -210,7 +210,7 @@
         $consulta=$db->prepare($consultaStr);
         $consulta->execute();
 
-        //------- OBTIENE ID DE CLIENTE ---------
+        #------- OBTIENE ID DE CLIENTE ---------
         $consultaStr="SELECT id_cliente FROM clientes WHERE nombre='$nombre' AND `telefono`='$telefono'";
         $consulta=$db->prepare($consultaStr);
         $consulta->execute();
@@ -218,7 +218,7 @@
 
         $idCliente=$dataConsulta["id_cliente"];
 
-        //Extrae folios de ContratoP, incrementa y lo almacena en variable
+        #Extrae folios de ContratoP, incrementa y lo almacena en variable
         $consultaStr="SELECT numero FROM folios WHERE clave='ContratoP'";
         $consulta=$db->prepare($consultaStr);
         $consulta->execute();
@@ -227,12 +227,12 @@
         $numContrato=$dataConsulta["numero"];
         $numContrato+=1;
 
-        //------------ACTUALIZA FOLIO CONTRATO--------------------------------------
+        #------------ACTUALIZA FOLIO CONTRATO-------------------
         $consultaStr="UPDATE folios SET numero=? WHERE clave='ContratoP'";
         $consulta=$db->prepare($consultaStr);
         $consulta->execute([$numContrato]);
 
-        //------- ACTUALIZA DATOS EN TABLA PRECONTRATOS ---------
+        #------- ACTUALIZA DATOS EN TABLA PRECONTRATOS ---------
         $consultaStr="UPDATE precontratos SET cliente= $idCliente, num_contrato=$numContrato, estatus=1, facturacion=0 WHERE folio_cotizacion='$folioCot'";
         $consulta=$db->prepare($consultaStr);
         $consulta->execute();
@@ -289,7 +289,15 @@
         require($root.'resources/cotizadores/cotizadoc/genera_recibo.php');
         #ENVIAR COMPROBANTE POR CORREO ELECTRONICO
         require($root.'sendMailTDC.php');
-        require($root.'templates/acilQuote/paymentConfirmedForm.php');
+
+        if($fallo==0)
+        {
+            include $root."templates/$theme/paymentConfirmedForm.php"; 
+        }
+        else if($fallo==1)
+        {
+            include $root."templates/$theme/registerUserFormError.php"; 
+        }
      }
      else
      {

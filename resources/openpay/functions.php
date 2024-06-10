@@ -159,10 +159,10 @@
 
             return [$cardNumber, $nameUser, $typeCard, $typeBrand, $idSuscripcion];
         }
-        catch(Exception $e){
+        catch(OpenpayApiTransactionError $e){
             $fallo = 1;
-            $cardNumber="";
-            return [$cardNumber];
+            $codigoError= $e->getErrorCode();
+            return [$codigoError];
         }
     }
 
@@ -183,9 +183,10 @@
             $descriptionCharge=$charge->description;
             return [$idCharge, $descriptionCharge];
         }
-        catch(Exception $e){ 
-            $idCharge="";
-            return [$idCharge];
+        catch(OpenpayApiTransactionError $e){
+            $fallo = 1;
+            $codigoError= $e->getErrorCode();
+            return [$codigoError];
         }
     }
 

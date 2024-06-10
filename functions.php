@@ -103,7 +103,8 @@
 
 	# $attachments => array(); -- Ejemplo ---> array('foto_ejemplo1.jpg', '../icons/foto_ejemplo2.png') -- (PARAMETRO OPCIONAL)
 
-	function sendEmail($recipients, $sender, $mailSubject ,$mailPath, $mailData, $host, $user, $password, $attachments = array()){
+	function sendEmail($recipients, $sender, $mailSubject ,$mailPath, $mailData, $host, $user, $password, $attachments = array())
+	{
 		
 		//Create an instance; passing `true` enables exceptions
 		$mail = new PHPMailer(true);

@@ -46,7 +46,7 @@
 <!-- Mensaje de Espera por Validación -->
 <br><br><div class="container-md d-flex justify-content-center align-items-center flex-column text-center mt-4 mb-5 container_form_custom">
     <h3>¡ Muchas Gracias !</h3>
-    <h4 class='mt-3'>Tus documentos fueron cargados correctamente y se encuentran en proceso de validacíon.</h4><br>
+    <h4 class='mt-3'>Tu comprobante de pago fue cargado correctamente y se encuentra en proceso de validacíon.</h4><br>
     <h6 class='mt-3'>* Nos comunicaremos contigo en un plazo máximo de 72 hrs. *</h6><br>
 </div><br><br><br><br>
 
