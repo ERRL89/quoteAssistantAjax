@@ -332,5 +332,11 @@
     {
         $dataUserPrecontract=insertPrecontrato(0);
     }
-    include_once('templates/acilQuote/registerUserForm.php');
+
+    if($fallo==0){
+		include $root."templates/$theme/registerUserForm.php"; // Cuerpo de la página
+	}
+	else if($fallo==1){
+		include $root."templates/$theme/registerUserFormError.php"; // Cuerpo de la página
+	}
 ?>

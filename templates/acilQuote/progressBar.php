@@ -1,4 +1,4 @@
-<br><br><div id="progressBar" style="display: none;">
+<div id="progressBar" style="display: none;">
     <div class="">
         <div class="w-100 h-100">
             <div class="form-signin divCenter mt-4">
@@ -13,5 +13,5 @@
             </div>
         </div>
     </div>
-</div><br><br>
+</div>
 

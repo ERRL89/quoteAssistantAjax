@@ -3,32 +3,38 @@
 <h1>¡ Lo sentimos !</h1>
 
 <?php
-    if($codigoError==3001){
+    if($codigoError==3001)
+    {
         echo "
               <h4 class='mt-3'>La tarjeta fue rechazada.</h4><br>
              ";
     }
-    else if($codigoError==3002){
+    else if($codigoError==3002)
+    {
         echo "
               <h4 class='mt-3'>La tarjeta ha expirado.</h4><br>
              ";
     }
-    else if($codigoError==3003){
+    else if($codigoError==3003)
+    {
         echo "
               <h4 class='mt-3'>La tarjeta no tiene fondos suficientes.</h4><br>
              ";
     }
-    else if($codigoError==3004){
+    else if($codigoError==3004)
+    {
         echo "
               <h4 class='mt-3'>La tarjeta ha sido identificada como una tarjeta robada.</h4><br>
              ";
     }
-    else if($codigoError==3005){
+    else if($codigoError==3005)
+    {
         echo "
               <h4 class='mt-3'>La tarjeta ha sido rechazada por el sistema antifraudes.</h4><br>
              ";
     }
-    else{
+    else
+    {
         echo "
               <h4 class='mt-3'>Error con Tarjeta.</h4><br>
              ";
@@ -41,6 +47,6 @@
 
 <script>
     function retryPay(){
-        window.history.back()
+        window.location.reload(true);
     }
 </script>

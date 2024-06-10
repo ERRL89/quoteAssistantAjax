@@ -57,26 +57,34 @@
   //ENVIA FORMULARIO A PANTALLA ACCEPT CONTRACT
   function sendForm()
   {
-    $.ajax({
-					url: './templates/acilQuote/acceptContractForm.php',
-					type: 'POST',
-					data: 
-					{
-            root:     '<?php echo $root; ?>',
-						nombre:   $('#nombre').val(),
-            calle:    $('#calle').val(),
-            numero:   $('#numero').val(),
-            colonia:  $('#colonia').val(),
-            kitType:  $('#kitType').val(),
-            kitNum:   $('#kitNum').val(),
-            kitPrice: $('#kitPrice').val(),
-            folioCot: '<?php echo $folioCot; ?>'
-					},
-					success: function(result)
-					{
-						$('#principal').html(result);
-					}
-		});
+    var form = document.getElementById("form");
+    if (form.checkValidity())
+    {
+      $.ajax({
+            url: './templates/acilQuote/acceptContractForm.php',
+            type: 'POST',
+            data: 
+            {
+              root:     '<?php echo $root; ?>',
+              nombre:   $('#nombre').val(),
+              calle:    $('#calle').val(),
+              numero:   $('#numero').val(),
+              colonia:  $('#colonia').val(),
+              kitType:  $('#kitType').val(),
+              kitNum:   $('#kitNum').val(),
+              kitPrice: $('#kitPrice').val(),
+              folioCot: '<?php echo $folioCot; ?>'
+            },
+            success: function(result)
+            {
+              $('#principal').html(result);
+            }
+      });
+    }
+    else
+    {
+      form.classList.add('was-validated')
+    }
   }
 
   //GENERA COTIZACION
