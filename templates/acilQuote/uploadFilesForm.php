@@ -118,6 +118,23 @@
   </form>
 </div>
 
+<div id="progressBar">
+    <div class="">
+        <div class="w-100 h-100">
+            <div class="form-signin divCenter mt-4">
+                <div class="cajalogin divCenter">
+                    <div class="progress" style="width:75%;">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <div class="texto-sesion text-center">
+                        <h3>Procesando ...</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- ---------------- CONSTRUCCION DE BARRA DE PROGRESO ---------------------------- -->
 <?php
     $messageProgress = "Actualizando ...";
@@ -127,8 +144,8 @@
 <!-- Función de Boton Enviar a Validacion -->
 <script>
   function sendValidation(){
-    var modal = new bootstrap.Modal(document.getElementById('exampleModal'));
-    modal.show();
+    $('#uploadForm').hide()
+    $('#progressBar').show()
     let btnValidation=1
     let numContrato='<?php echo $numContrato;?>'
     let root='<?php echo $root;?>'
@@ -143,7 +160,7 @@
                 },
             success: function(result)
                 {
-                  modal.hide();
+                  $('#progressBar').hide()
                   $('#principal').html(result);
                 }
             });       
@@ -177,6 +194,7 @@
 <!-- Control de selector Editar Datos Fiscales -->
 <script>
     $(document).ready(function(){
+        $("#progressBar").hide()
         $('input[type="file"]').change(function() {
             if (this.files && this.files.length > 0) {
                 $('#btnEnviar').removeAttr('disabled');

@@ -69,18 +69,6 @@
     ?>
 </script>
 
-<!-- Modal ENVIANDO correo electronico al area de validacion de contratos-->
-<div class="modal fade" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-body">
-                <center><div class="loader"></div></center>
-                <center><h2>Enviando...</h2></center>
-            </div>
-        </div>
-    </div>
-</div>
-
 <!-- General Canvas-->
 <div id=principal></div>
 

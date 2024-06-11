@@ -17,7 +17,7 @@
     $mailHost = "smtp.gmail.com";
     $mailUser = "acilpruebas@gmail.com";
     $mailPass = "gdogzbybgvgnwvsg";
-    $mailSender = array("email" => "acilpruebas@gmail.com", "name" => "Acil Info");
+    $mailSender = array("email" => "acilpruebas@gmail.com", "name" => "Notificaciones Intranet ACIL (Demo)");
     #
     // INFORMACIÓN PARA TEST //
 
