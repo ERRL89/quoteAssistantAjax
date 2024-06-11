@@ -17,6 +17,7 @@
         if(isset($_POST['regimen']))/*---------*/{ $regimen         = $_POST['regimen'];         } 
         if(isset($_POST['cfdi']))/*------------*/{ $cfdi            = $_POST['cfdi'];            } 
         if(isset($_POST['kitNum']))/*----------*/{ $kitNum          = $_POST['kitNum'];          } 
+        if(isset($_POST['kitType']))/*---------*/{ $kitType         = $_POST['kitType'];          } 
         if(isset($_POST['kitMensualidad']))/*--*/{ $kitMensualidad  = $_POST['kitMensualidad'];  } 
         if(isset($_POST['acuerdoPago']))/*-----*/{ $acuerdoPago     = $_POST['acuerdoPago'];     } 
         if(isset($_POST['modalidad']))/*-------*/{ $modalidad       = $_POST['modalidad'];       } 
@@ -202,7 +203,7 @@
         $db2=conexion_pdo();
         $consultaStr="SELECT * FROM kits_combos WHERE id_kit=?";
         $consulta=$db2->prepare($consultaStr);
-        $consulta->execute([$numeroKitDB]);
+        $consulta->execute([$kitNum]);
         $dataConsulta=$consulta->fetch(PDO::FETCH_ASSOC);
         $nombreKitDB=$dataConsulta["nombre"];
         $id_plan=$dataConsulta["id_plan"];

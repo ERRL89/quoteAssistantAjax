@@ -675,7 +675,7 @@ $urlParams = array(
 );
 
 $queryString = http_build_query($urlParams);
-$url = $routeAcil."closeContract.php?".$queryString;
+$url = $routeAcil."quote.php?".$queryString;
 $pdf->Link(140, 20, 61, 17, $url);
 
 $pdf->SetLineStyle(array('width' => 0, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(202, 93, 35)));

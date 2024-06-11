@@ -1227,6 +1227,7 @@
       formData.append('cfdi',            $('#cfdi').val()            );
       formData.append('kitNum',          '<?php echo $kitNum; ?>'    );
       formData.append('kitMensualidad',  $('#kitMensualidad').val()  );
+      formData.append('kitType',         $('#kitType').val()  );
       formData.append('acuerdoPago',     $('#acuerdoPago').val()     );
       formData.append('modalidad',       $('#modalidad').val()       );
       formData.append('frecuenciaPago',  $('#frecuenciaPago').val()  );

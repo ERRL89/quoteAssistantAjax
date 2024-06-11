@@ -127,7 +127,7 @@
                         <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                     <div class="texto-sesion text-center">
-                        <h3>Procesando ...</h3>
+                        <h3>Enviando ...</h3>
                     </div>
                 </div>
             </div>
