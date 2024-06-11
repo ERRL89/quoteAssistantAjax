@@ -20,7 +20,7 @@
             <hr class="line_hr">
                         <li><h6 class="mt-3">Folio: <?php echo $dataUserPrecontract["idPreContratoDB"];?></h6></li>
                         <li><h6>Cotización: <?php echo $dataUserPrecontract["folioCotizacionDB"];?></h6></li>
-                        <li><h6>kit: <?php echo $dataUserPrecontract["nombreKitDB"];?></h6></li>
+                        <li><h6>kit: <?php echo $kitType;?></h6></li>
                         <li><h6>Mensualidad: $<?php echo $dataUserPrecontract["mensualidadDB"]; $pagoMensualidad=$dataUserPrecontract["mensualidadDB"]?></h6></li>
                         <li><h6>Metodo de Pago: <?php echo $metodoPagoTxt;?></h6></li> 
             <?php
