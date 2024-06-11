@@ -660,6 +660,7 @@
   </form>
 </div>
 
+<!-- BARRA DE PROGRESO -->
 <div id="progressBar">
     <div class="">
         <div class="w-100 h-100">
@@ -1260,7 +1261,7 @@
           contentType: false,
           success: function(result)
           {
-              $("#datosBancarios").hide()
+              $("#progressBar").hide()
               $('#principal').html(result);
               
           }
